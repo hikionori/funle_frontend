@@ -1,10 +1,12 @@
-FROM python:3.10.3-slim
+FROM python:3.10.5
 
-WORKDIR /app
+WORKDIR /back
 
-COPY requirements.txt requirements.txt
+COPY requirements.txt /back/requirements.txt
+COPY main.py /back/main.py
+
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY /server /back/server
 
-CMD ["uvicorn", "api:app", "--host", "localhost", "--port", "8000"]
+CMD ["python", "main.py"]
