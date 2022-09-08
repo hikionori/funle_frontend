@@ -1,12 +1,12 @@
 FROM python:3.10.5
 
-WORKDIR /back
+WORKDIR /
 
-COPY requirements.txt /back/requirements.txt
-COPY main.py /back/main.py
+COPY requirements.txt requirements.txt
+COPY main.py /main.py
 
 RUN pip install -r requirements.txt
 
-COPY /server /back/server
+COPY /server /server
 
 CMD ["python", "main.py"]
