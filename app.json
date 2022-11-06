@@ -1,6 +1,9 @@
 {
   "expo": {
     "name": "math",
+    "plugins": [
+      "expo-community-flipper"
+    ],
     "slug": "math",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,10 +27,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.workhiki.math"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "56d04ddd-6c6c-4ca0-8b23-cb886b1a3886"
+      }
     }
   }
 }

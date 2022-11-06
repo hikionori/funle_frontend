@@ -6,6 +6,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container} >
       <Text style={styles.title}>ProfileScreen</Text>
+      <Text style={styles.subtitle}>This is the ProfileScreen</Text>
     </View>
   )
 }
