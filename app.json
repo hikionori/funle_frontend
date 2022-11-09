@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "math",
+    "name": "FunLe",
+    "owner": "workhiki",
     "plugins": [
       "expo-community-flipper"
     ],
-    "slug": "math",
+    "slug": "funlemathapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -35,8 +36,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "56d04ddd-6c6c-4ca0-8b23-cb886b1a3886"
-      }
+        "projectId": "653e4ffa-1cca-49e0-9540-ee122e27c8b5"
+      },
+      "flipperHack": "React Native package is running"
     }
   }
 }
