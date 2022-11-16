@@ -38,5 +38,6 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
     </>
+  
   );
 }
