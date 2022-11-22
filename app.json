@@ -1,7 +1,11 @@
 {
   "expo": {
-    "name": "math",
-    "slug": "math",
+    "name": "FunLe",
+    "owner": "workhiki",
+    "plugins": [
+      "expo-community-flipper"
+    ],
+    "slug": "funlemathapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,16 +22,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.workhiki.math"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.workhiki.math"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "653e4ffa-1cca-49e0-9540-ee122e27c8b5"
+      },
+      "flipperHack": "React Native package is running"
     }
   }
 }
