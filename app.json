@@ -3,8 +3,8 @@
     "name": "FunLe",
     "owner": "workhiki",
     "plugins": [
-      "expo-community-flipper"
-    ],
+		"expo-community-flipper"
+	],
     "slug": "funlemathapp",
     "version": "1.0.0",
     "orientation": "portrait",
