@@ -6,7 +6,8 @@ import styles from './style';
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>HomeScreen</Text>
+     <Text>Test</Text>
+	 <Text style={styles.title}>HomeScreen</Text>
       <Text style={styles.subtitle}>This is the HomeScreen</Text>
     </View>
   )
