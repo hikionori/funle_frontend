@@ -42,3 +42,4 @@ const register = async (name: string, email: string, password: string, role: Use
     return response.status
 }
 
+export {auth, login, register}
