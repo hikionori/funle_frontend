@@ -1,14 +1,28 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {
+    Pressable,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    ViewStyle,
+} from "react-native";
+import React from "react";
 
-const Button = () => {
-  return (
-    <View>
-      <Text>Button</Text>
-    </View>
-  )
+interface ButtonProps {
+    title: string;
+    onPress: () => void;
+    style: StyleProp<ViewStyle>;
 }
 
-export default Button
+const CustomButton = (props: ButtonProps) => {
+    return (
+        <Pressable onPress={props.onPress} style={props.style}>
+            <Text>{props.title}</Text>
+        </Pressable>
+    );
+};
 
-const styles = StyleSheet.create({})
+export default CustomButton;
+
+const styles = StyleSheet.create({});
