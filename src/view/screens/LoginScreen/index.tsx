@@ -7,15 +7,44 @@ import {
     ImageBackground,
     TextInput,
     Pressable,
+    Keyboard,
 } from "react-native";
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 
 import { StatusBar } from "expo-status-bar";
 
 import styles from "./styles";
-import CustomButton from "../../components/Button";
+import useAuthStore from "../../../logic/auth";
 
-const LoginScereen = ({ navigation }) => {
+
+const LoginScereen = ({ navigation }: any) => {
+
+    // TODO: change font family to "Fixel"
+    //* TODO: useCallback to interact with zustand
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+
+    const [keyboardVisible, setKeyboardVisible] = React.useState(false);
+
+
+    const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
+    const setAuth = useAuthStore((state: any) => state.setAuth);
+    console.log("loggedIn", loggedIn);
+
+    useEffect(() => {
+        if (loggedIn) {
+            navigation.navigate("MainApp");
+        }
+
+        Keyboard.addListener("keyboardDidShow", () => {
+            setKeyboardVisible(true);
+        });
+        Keyboard.addListener("keyboardDidHide", () => {
+            setKeyboardVisible(false);
+        });
+
+    }, [])
+
     return (
         <SafeAreaView>
             <StatusBar style="auto" />
@@ -68,8 +97,14 @@ const LoginScereen = ({ navigation }) => {
                         height: 50,
                         marginBottom: 10,
                         borderColor: "black",
+                        opacity: 0.54,
                         borderWidth: 1,
                     }}
+                    onChangeText={(e) => {
+                        setEmail(e);
+                    }}
+                    textContentType="emailAddress"
+
                 />
                 {/* password field */}
                 <TextInput
@@ -83,13 +118,23 @@ const LoginScereen = ({ navigation }) => {
                         height: 50,
                         marginBottom: 10,
                         borderColor: "black",
+                        opacity: 0.54,
                         borderWidth: 1,
                     }}
+                    onChangeText={(e) => {
+                        setPassword(e);
+                    }}
+                    textContentType="password"
+                    secureTextEntry={true}
                 />
                 {/* login button */}
                 <Pressable
                     onPress={() => {
-                        navigation.navigate("MainApp");
+                        if (email && password) {
+                            // navigate to home screen without chance to go back
+                            setAuth(true);
+                            navigation.navigate("MainApp");
+                        }
                     }}
                     style={{
                         backgroundColor: "#E67B02",
@@ -99,6 +144,17 @@ const LoginScereen = ({ navigation }) => {
                         height: 50,
                         alignItems: "center",
                         justifyContent: "center",
+
+                        // shadow to bottom
+                        shadowColor: "#E67B02",
+                        shadowOffset: {
+                            width: 0,
+                            height: 4,
+                        },
+                        shadowOpacity: 0.82,
+                        shadowRadius: 3.46,
+
+                        elevation: 9,
                     }}
                 >
                     <Text
@@ -115,7 +171,7 @@ const LoginScereen = ({ navigation }) => {
                 {/* text link to register screen 
 					AKA "Don't have an account? Sign up" */}
                 {/* inline this */}
-                <View
+                {!keyboardVisible && <View
                     style={{
                         flexDirection: "row",
                         // space between
@@ -123,6 +179,8 @@ const LoginScereen = ({ navigation }) => {
                         // place at bottom of screen
                         position: "absolute",
                         bottom: 50,
+
+                        zIndex: 0,
                     }}
                 >
                     <Text
@@ -143,7 +201,7 @@ const LoginScereen = ({ navigation }) => {
                     >
                         Sign up
                     </Text>
-                </View>
+                </View>}
             </ImageBackground>
         </SafeAreaView>
     );
