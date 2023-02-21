@@ -17,6 +17,7 @@ const useAuthStore = create((set) => ({
             set({loggedIn: true, token: token});
         }
     },
+    // setAuth its debug function
     setAuth: (state: boolean) => set({loggedIn: state, token: "".toString()}),
 }));
 

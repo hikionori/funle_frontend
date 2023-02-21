@@ -16,9 +16,7 @@ import { StatusBar } from "expo-status-bar";
 import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
 
-
 const LoginScereen = ({ navigation }: any) => {
-
     // TODO: change font family to "Fixel"
     //* TODO: useCallback to interact with zustand
     const [email, setEmail] = React.useState("");
@@ -26,10 +24,9 @@ const LoginScereen = ({ navigation }: any) => {
 
     const [keyboardVisible, setKeyboardVisible] = React.useState(false);
 
-
     const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
-    const setAuth = useAuthStore((state: any) => state.setAuth);
-    console.log("loggedIn", loggedIn);
+    const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
+    // console.log("loggedIn", loggedIn); //! debug
 
     useEffect(() => {
         if (loggedIn) {
@@ -42,8 +39,7 @@ const LoginScereen = ({ navigation }: any) => {
         Keyboard.addListener("keyboardDidHide", () => {
             setKeyboardVisible(false);
         });
-
-    }, [])
+    }, []);
 
     return (
         <SafeAreaView>
@@ -67,6 +63,7 @@ const LoginScereen = ({ navigation }: any) => {
                         height: 270,
                         resizeMode: "contain",
                         bottom: 0,
+                        //! debug
                         // display image curner
                         // borderRadius: 20,
                         // borderColor: "black",
@@ -88,39 +85,16 @@ const LoginScereen = ({ navigation }: any) => {
                 {/* email field */}
                 <TextInput
                     placeholder="Email"
-                    style={{
-                        backgroundColor: "white",
-                        padding: 10,
-                        paddingLeft: 20,
-                        borderRadius: 40,
-                        width: 300,
-                        height: 50,
-                        marginBottom: 10,
-                        borderColor: "black",
-                        opacity: 0.54,
-                        borderWidth: 1,
-                    }}
+                    style={styles.textField}
                     onChangeText={(e) => {
                         setEmail(e);
                     }}
                     textContentType="emailAddress"
-
                 />
                 {/* password field */}
                 <TextInput
                     placeholder="Password"
-                    style={{
-                        backgroundColor: "white",
-                        padding: 10,
-                        paddingLeft: 20,
-                        borderRadius: 40,
-                        width: 300,
-                        height: 50,
-                        marginBottom: 10,
-                        borderColor: "black",
-                        opacity: 0.54,
-                        borderWidth: 1,
-                    }}
+                    style={styles.textField}
                     onChangeText={(e) => {
                         setPassword(e);
                     }}
@@ -136,26 +110,7 @@ const LoginScereen = ({ navigation }: any) => {
                             navigation.navigate("MainApp");
                         }
                     }}
-                    style={{
-                        backgroundColor: "#E67B02",
-                        padding: 10,
-                        borderRadius: 40,
-                        width: 160,
-                        height: 50,
-                        alignItems: "center",
-                        justifyContent: "center",
-
-                        // shadow to bottom
-                        shadowColor: "#E67B02",
-                        shadowOffset: {
-                            width: 0,
-                            height: 4,
-                        },
-                        shadowOpacity: 0.82,
-                        shadowRadius: 3.46,
-
-                        elevation: 9,
-                    }}
+                    style={styles.btn}
                 >
                     <Text
                         style={{
@@ -171,37 +126,39 @@ const LoginScereen = ({ navigation }: any) => {
                 {/* text link to register screen 
 					AKA "Don't have an account? Sign up" */}
                 {/* inline this */}
-                {!keyboardVisible && <View
-                    style={{
-                        flexDirection: "row",
-                        // space between
-                        justifyContent: "space-between",
-                        // place at bottom of screen
-                        position: "absolute",
-                        bottom: 50,
+                {!keyboardVisible && (
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            // space between
+                            justifyContent: "space-between",
+                            // place at bottom of screen
+                            position: "absolute",
+                            bottom: 50,
 
-                        zIndex: 0,
-                    }}
-                >
-                    <Text
-                        style={{
-                            color: "black",
-                            paddingRight: 5,
+                            zIndex: 0,
                         }}
                     >
-                        Don't have an account?
-                    </Text>
-                    <Text
-                        onPress={() => navigation.navigate("Register")}
-                        style={{
-                            color: "blue",
-                            // inline this
-                            textDecorationLine: "underline",
-                        }}
-                    >
-                        Sign up
-                    </Text>
-                </View>}
+                        <Text
+                            style={{
+                                color: "black",
+                                paddingRight: 5,
+                            }}
+                        >
+                            Don't have an account?
+                        </Text>
+                        <Text
+                            onPress={() => navigation.navigate("Register")}
+                            style={{
+                                color: "blue",
+                                // inline this
+                                textDecorationLine: "underline",
+                            }}
+                        >
+                            Sign up
+                        </Text>
+                    </View>
+                )}
             </ImageBackground>
         </SafeAreaView>
     );
