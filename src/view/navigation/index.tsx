@@ -30,10 +30,11 @@ export const AuthNavScreens = () => {
         <AuthNavigation.Navigator screenOptions={{
             headerShown: false,
             gestureEnabled: false,
+            animation: "slide_from_right",
         }}>
             <AuthNavigation.Screen name="Login" component={LoginScreen} />
             <AuthNavigation.Screen name="Register" component={RegisterScreen} />
-            <AuthNavigation.Screen name="MainApp" component={HomeNavScreens} />
+            {/* <AuthNavigation.Screen name="MainApp" component={HomeNavScreens} /> */}
         </AuthNavigation.Navigator>
     );
 }

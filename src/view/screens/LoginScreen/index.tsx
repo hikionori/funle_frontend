@@ -29,10 +29,6 @@ const LoginScereen = ({ navigation }: any) => {
     // console.log("loggedIn", loggedIn); //! debug
 
     useEffect(() => {
-        if (loggedIn) {
-            navigation.navigate("MainApp");
-        }
-
         Keyboard.addListener("keyboardDidShow", () => {
             setKeyboardVisible(true);
         });
@@ -105,9 +101,8 @@ const LoginScereen = ({ navigation }: any) => {
                 <Pressable
                     onPress={() => {
                         if (email && password) {
-                            // navigate to home screen without chance to go back
-                            setAuth(true);
-                            navigation.navigate("MainApp");
+                            setAuth(true); //! debug
+                            //*  TODO: use login function from zustand store for login
                         }
                     }}
                     style={styles.btn}
