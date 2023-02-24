@@ -15,6 +15,7 @@ import { StatusBar } from "expo-status-bar";
 
 import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
+import { useFonts } from "expo-font";
 
 const LoginScereen = ({ navigation }: any) => {
     // TODO: change font family to "Fixel"
@@ -27,6 +28,12 @@ const LoginScereen = ({ navigation }: any) => {
     const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
     const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
     // console.log("loggedIn", loggedIn); //! debug
+
+    const [fontLoaded] = useFonts({
+        "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
+        "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
+        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf")
+    });
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {
@@ -41,7 +48,7 @@ const LoginScereen = ({ navigation }: any) => {
         <SafeAreaView>
             <StatusBar style="auto" />
             <ImageBackground
-                source={require("../../../../assets/bg.png")}
+                source={require("../../../../assets/images/bg.png")}
                 style={{
                     width: "100%",
                     height: "100%",
@@ -52,7 +59,7 @@ const LoginScereen = ({ navigation }: any) => {
             >
                 {/* Logo */}
                 <Image
-                    source={require("../../../../assets/logoBig.png")}
+                    source={require("../../../../assets/images/logoBig.png")}
                     style={{
                         top: -100,
                         width: 300,
@@ -71,8 +78,9 @@ const LoginScereen = ({ navigation }: any) => {
                         style={{
                             top: -50,
                             color: "black",
-                            fontWeight: "bold",
-                            fontSize: 30,
+                            fontWeight: "500",
+                            fontSize: 40,
+                            fontFamily: "MacPawFixelDisplay-Black",
                         }}
                     >
                         FunLe
@@ -89,6 +97,7 @@ const LoginScereen = ({ navigation }: any) => {
                 />
                 {/* password field */}
                 <TextInput
+                    // placeholderTextColor={"blac"}
                     placeholder="Password"
                     style={styles.textField}
                     onChangeText={(e) => {
@@ -112,7 +121,7 @@ const LoginScereen = ({ navigation }: any) => {
                             color: "white",
                             fontWeight: "bold",
                             fontSize: 15,
-                            fontFamily: "sans-serif",
+                            fontFamily: "MacPawFixelDisplay-Bold",
                         }}
                     >
                         Login
@@ -138,6 +147,7 @@ const LoginScereen = ({ navigation }: any) => {
                             style={{
                                 color: "black",
                                 paddingRight: 5,
+                                fontFamily: "MacPawFixelDisplay-Medium",
                             }}
                         >
                             Don't have an account?
@@ -148,6 +158,7 @@ const LoginScereen = ({ navigation }: any) => {
                                 color: "blue",
                                 // inline this
                                 textDecorationLine: "underline",
+                                fontFamily: "MacPawFixelDisplay-Medium",
                             }}
                         >
                             Sign up

@@ -41,6 +41,5 @@ export default StyleSheet.create({
         opacity: 0.54,
         borderWidth: 1,
         fontFamily: "MacPawFixelDisplay-Medium",
-        fontWeight: "300",
     },
 });
