@@ -31,7 +31,7 @@ export const AuthNavScreens = () => {
             headerShown: false,
             gestureEnabled: false,
             animation: "slide_from_right",
-        }} initialRouteName="Register">
+        }} initialRouteName="Login">
             <AuthNavigation.Screen name="Login" component={LoginScreen} />
             <AuthNavigation.Screen name="Register" component={RegisterScreen} />
             {/* <AuthNavigation.Screen name="MainApp" component={HomeNavScreens} /> */}
