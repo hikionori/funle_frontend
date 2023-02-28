@@ -22,24 +22,49 @@ export interface UserProgress {
     cources: string[];
 }
 
+// Send token to api and get response 
+// response {is_valid: boolean, user_id: string}
 const auth = async (token: string) => {
-    var response = await axios.post(`${baseUrl}/auth`, {"token": token})
-    return response.data
+    var response = await axios.post(baseUrl + "/auth", {
+        "token": token
+    }).catch((error) => {
+        console.log(error);
+    });
+    if (response) {
+        return response.data;
+    }
 }
 
+// Send email and password to api and get response
+// response {access_token, refresh_token}
 const login = async (email: string, password: string) => {
-    var res = await axios.post(`${baseUrl}/user/login/users`, {"email": email, "password": password});
-    return res.data
+    var response = await axios.post(baseUrl + "/user/login/users", {
+        "email": email,
+        "password": password
+    }).catch((error) => {
+        console.log(error);
+    });
+    if (response) {
+        return response;
+    }
 }
 
+// Send name, email, password and role to api and get response
+// dont have response
+// return status code
 const register = async (name: string, email: string, password: string, role: UserRole) => {
-    var response = await axios.post(`${baseUrl}/user/regisyer/users`, {
+    var response = await axios.post(baseUrl + "/user/register/users", {
         "name": name,
         "email": email,
         "password": password,
-        "role": role.toString
-    })
-    return response.status
+        "role": role.toString()
+    }).catch((error) => {
+        console.log(error);
+    }
+    );
+    if (response) {
+        return response.status;
+    }
 }
 
 export {auth, login, register}

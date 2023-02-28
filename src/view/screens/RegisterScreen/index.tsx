@@ -11,6 +11,7 @@ import {
 import React, { Component, useEffect } from "react";
 
 import styles from "./styles";
+import useAuthStore from "../../../logic/auth";
 import { useFonts } from "expo-font";
 
 const RegisterScreen = ({ navigation }: any) => {
@@ -19,6 +20,7 @@ const RegisterScreen = ({ navigation }: any) => {
     const [password, setPassword] = React.useState("");
 
     const [keyboardVisible, setKeyboardVisible] = React.useState(false);
+    const register: any = useAuthStore((state: any) => state.register);
 
     const [fontLoaded] = useFonts({
         "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
@@ -119,8 +121,8 @@ const RegisterScreen = ({ navigation }: any) => {
                 {/* register button */}
                 <Pressable
                     onPress={() => {
-                        // TODO: register
-                        console.log("register");
+                        register(username, email, password);
+                        navigation.navigate("Login");
                     }}
                     style={styles.btn}
                 >

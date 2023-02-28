@@ -27,6 +27,8 @@ const LoginScereen = ({ navigation }: any) => {
     const [keyboardVisible, setKeyboardVisible] = React.useState(false);
 
     const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
+    const login: any = useAuthStore((state: any) => state.login);
+
     const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
     // console.log("loggedIn", loggedIn); //! debug
 
@@ -112,8 +114,7 @@ const LoginScereen = ({ navigation }: any) => {
                     <Pressable
                         onPress={() => {
                             if (email && password) {
-                                setAuth(true); //! debug
-                                //*  TODO: use login function from zustand store for login
+                                login(email, password);
                             }
                         }}
                         style={styles.btn}
