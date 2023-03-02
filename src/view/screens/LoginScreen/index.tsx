@@ -81,29 +81,18 @@ const LoginScereen = ({ navigation }: any) => {
                             // borderWidth: 1,
                         }}
                     />
-                    <View style={{
-                        flexDirection: "row",
-                        padding: 0,
-                        margin: 0,
-                    }}>
+                    <View>
                         <Text
                             style={{
                                 top: -50,
-                                color: "#E67B02",
+                                color: "black",
                                 fontWeight: "500",
                                 fontSize: 40,
                                 fontFamily: "MacPawFixelDisplay-Black",
                             }}
                         >
-                            Fun
+                            FunLe
                         </Text>
-                        <Text style={{
-                            top: -50,
-                            color: "#454545",
-                            fontWeight: "500",
-                            fontSize: 40,
-                            fontFamily: "MacPawFixelDisplay-Black",
-                        }}>Le</Text>
                     </View>
                     {/* email field */}
                     <TextInput

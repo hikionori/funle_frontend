@@ -11,8 +11,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
@@ -26,8 +24,11 @@ export const HomeNavScreens = () => {
                     position: "absolute",
                     backgroundColor: "#E67B02",
                     height: 55,
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
+                    bottom: 5,
+                    left: 10,
+                    right: 10,
+                    width: "95%",
+                    borderRadius: 15,
                     elevation: 0,
                 },
             }}
@@ -40,13 +41,13 @@ export const HomeNavScreens = () => {
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
                             return (
-                                <MaterialIcons name="home" size={37} color="white" />
+                                <Ionicons name="home" size={24} color="white" />
                             );
                         }
                         return (
-                            <MaterialCommunityIcons
+                            <Ionicons
                                 name="home-outline"
-                                size={37}
+                                size={24}
                                 color="white"
                             />
                         );
@@ -62,16 +63,16 @@ export const HomeNavScreens = () => {
                         if (focused) {
                             return (
                                 <Ionicons
-                                    name="person-circle"
-                                    size={37}
+                                    name="person"
+                                    size={24}
                                     color="white"
                                 />
                             );
                         }
                         return (
                             <Ionicons
-                                name="person-circle-outline"
-                                size={37}
+                                name="person-outline"
+                                size={24}
                                 color="white"
                             />
                         );
