@@ -47,6 +47,10 @@ const LoginScereen = ({ navigation }: any) => {
         });
     }, []);
 
+    if (!fontLoaded) {
+        return null;
+    }
+
     return (
         <SafeAreaView>
             <StatusBar style="auto" />
@@ -123,7 +127,7 @@ const LoginScereen = ({ navigation }: any) => {
                             style={{
                                 color: "white",
                                 fontWeight: "bold",
-                                fontSize: 15,
+                                fontSize: 18,
                                 fontFamily: "MacPawFixelDisplay-Bold",
                             }}
                         >
@@ -161,7 +165,8 @@ const LoginScereen = ({ navigation }: any) => {
                                     color: "blue",
                                     // inline this
                                     textDecorationLine: "underline",
-                                    fontFamily: "MacPawFixelDisplay-Medium",
+                                    fontFamily: "MacPawFixelDisplay-Bold",
+
                                 }}
                             >
                                 Sign up
