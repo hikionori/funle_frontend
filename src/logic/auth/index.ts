@@ -3,7 +3,7 @@ import {login, auth, register, UserRole} from '../../repository/user_reposytory'
 import { AxiosResponse } from "axios";
 
 const useAuthStore = create((set) => ({
-    loggedIn: true,
+    loggedIn: false,
     token: "".toString(),
 
     // request {email, password} response {aceess_token, refresh_token}

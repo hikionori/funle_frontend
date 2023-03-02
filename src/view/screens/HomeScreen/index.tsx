@@ -6,7 +6,6 @@ import styles from "./style";
 const HomeScreen = () => {
     return (
         <View style={styles.container}>
-            <Text>Test</Text>
             <Text style={styles.title}>HomeScreen</Text>
             <Text style={styles.subtitle}>This is the HomeScreen</Text>
         </View>

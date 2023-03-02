@@ -25,7 +25,7 @@ const RegisterScreen = ({ navigation }: any) => {
     const [fontLoaded] = useFonts({
         "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
         "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf")
+        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
     });
 
     useEffect(() => {
@@ -37,7 +37,6 @@ const RegisterScreen = ({ navigation }: any) => {
         });
 
         // loadFontAsync();
-
     }, []);
 
     if (!fontLoaded) {
@@ -73,21 +72,30 @@ const RegisterScreen = ({ navigation }: any) => {
                         // borderWidth: 1,
                     }}
                 />
-                <View>
+                <View style={{
+                    flexDirection: "row",
+                }}>
                     <Text
                         style={{
                             top: -50,
-                            color: "black",
-
-                            // fontWeight: "100",
+                            color: "#E67B02",
+                            fontWeight: "500",
                             fontSize: 40,
-                            // fontStyle: "normal",
                             fontFamily: "MacPawFixelDisplay-Black",
-                            lineHeight: 45,
-                            paddingBottom: -10,
                         }}
                     >
-                        FunLe
+                        Fun
+                    </Text>
+                    <Text
+                        style={{
+                            top: -50,
+                            color: "#454545",
+                            fontWeight: "500",
+                            fontSize: 40,
+                            fontFamily: "MacPawFixelDisplay-Black",
+                        }}
+                    >
+                        Le
                     </Text>
                 </View>
                 {/* username field */}
@@ -155,7 +163,7 @@ const RegisterScreen = ({ navigation }: any) => {
                             style={{
                                 color: "black",
                                 paddingRight: 5,
-                                fontFamily: "MacPawFixelDisplay-Medium"
+                                fontFamily: "MacPawFixelDisplay-Medium",
                             }}
                         >
                             Already have an account?
@@ -166,7 +174,7 @@ const RegisterScreen = ({ navigation }: any) => {
                                 color: "blue",
                                 // inline this
                                 textDecorationLine: "underline",
-                                fontFamily: "MacPawFixelDisplay-Bold"
+                                fontFamily: "MacPawFixelDisplay-Bold",
                             }}
                         >
                             Login
