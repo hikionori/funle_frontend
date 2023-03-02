@@ -81,17 +81,30 @@ const LoginScereen = ({ navigation }: any) => {
                             // borderWidth: 1,
                         }}
                     />
-                    <View>
+                    <View style={{
+                        flexDirection: "row",
+                    }}>
                         <Text
                             style={{
                                 top: -50,
-                                color: "black",
+                                color: "#E67B02",
                                 fontWeight: "500",
                                 fontSize: 40,
                                 fontFamily: "MacPawFixelDisplay-Black",
                             }}
                         >
-                            FunLe
+                            Fun
+                        </Text>
+                        <Text
+                            style={{
+                                top: -50,
+                                color: "#454545",
+                                fontWeight: "500",
+                                fontSize: 40,
+                                fontFamily: "MacPawFixelDisplay-Black",
+                            }}
+                        >
+                            Le
                         </Text>
                     </View>
                     {/* email field */}
@@ -166,7 +179,6 @@ const LoginScereen = ({ navigation }: any) => {
                                     // inline this
                                     textDecorationLine: "underline",
                                     fontFamily: "MacPawFixelDisplay-Bold",
-
                                 }}
                             >
                                 Sign up
