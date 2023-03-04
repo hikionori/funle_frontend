@@ -67,4 +67,13 @@ const register = async (name: string, email: string, password: string, role: Use
     }
 }
 
-export {auth, login, register}
+const get_user_info = async (token: string) => {
+    var response = await axios.post(baseUrl + "/user/get/user" + `/${token}`).catch((error) => {
+        console.log(error);
+    });
+    if (response) {
+        return response.data as User;
+    }
+}
+
+export { auth, login, register, get_user_info };

@@ -1,6 +1,5 @@
 import {create} from "zustand";
 import {login, auth, register, UserRole} from '../../repository/user_reposytory';
-import { AxiosResponse } from "axios";
 
 const useAuthStore = create((set) => ({
     loggedIn: false,
