@@ -1,4 +1,4 @@
-package com.workhiki.math.newarchitecture;
+package com.funle.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -18,10 +18,11 @@ import com.facebook.react.fabric.ComponentFactory;
 import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
+import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.workhiki.math.BuildConfig;
-import com.workhiki.math.newarchitecture.components.MainComponentsRegistry;
-import com.workhiki.math.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.funle.BuildConfig;
+import com.funle.newarchitecture.components.MainComponentsRegistry;
+import com.funle.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
                 return new FabricJSIModuleProvider(
                     reactApplicationContext,
                     componentFactory,
-                    new EmptyReactNativeConfig(),
+                    ReactNativeConfig.DEFAULT_CONFIG,
                     viewManagerRegistry);
               }
             });
