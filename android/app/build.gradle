@@ -142,8 +142,8 @@ android {
 
     defaultConfig {
         applicationId 'com.workhiki.math'
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion : 31
+        targetSdkVersion rootProject.ext.targetSdkVersion : 31
         versionCode 1
         versionName "1.0.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
