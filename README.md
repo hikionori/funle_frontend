@@ -40,6 +40,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 > ngrok http 8080
 ```
 Скопировать адрес из терминала и вставить в файл `funle_frontend/src/repository/constants.ts` в переменную `baseUrl`
+
 5. Далее будем работать с фронтендом
 ```bash
 > cd funle_frontend
