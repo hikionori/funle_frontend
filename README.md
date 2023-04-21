@@ -11,6 +11,8 @@
 ```
 
 2. Установить MongoDB с помощью Docker
+Для установки Docker необходимо перейти по [ссылке](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) и скачать Docker Desktop для Windows
+
 ```bash
 > docker pull mongo
 ```
