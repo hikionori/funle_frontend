@@ -35,6 +35,26 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```bash
 > cargo run --release
 ```
+
+>**В случае ошибки**
+>```bash
+>error: failed to run custom build command for `pear_codegen v0.1.5`
+>
+>Caused by:
+>  process didn't exit successfully: `/home/hikionori/Documents/Projects/Diplom/funle_backend/target/release  build/pear_codegen-69fc57a4fbc6be48/build-script-build` (exit status: 101)
+>  --- stderr
+>  Error: Pear requires a 'dev' or 'nightly' version of rustc.
+>  Installed version: 1.68.0 (2023-03-06)
+>  Minimum required:  1.31.0-nightly (2018-10-05)
+>  thread 'main' panicked at 'Aborting compilation due to incompatible compiler.', /home/hikionori/.cargo/registry/src/github.com-1ecc6299db9ec823/pear_codegen-0.1.5/build.rs:24:13
+>  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+>```
+>
+>Выполнить следующую команду
+>```bash
+>> rustup override set nightly
+>```
+
 В одельном терминале запустить ngrok
 ```bash
 > ngrok http 8080
