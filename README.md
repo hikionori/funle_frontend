@@ -37,7 +37,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 > cd funle_backend
 ```
 ```bash
-> cargo run --release
+> cargo test && cargo run --release
 ```
 
 >**В случае ошибки**
