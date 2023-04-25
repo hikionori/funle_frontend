@@ -18,7 +18,7 @@ import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
 import { useFonts } from "expo-font";
 
-const LoginScereen = ({ navigation }: any) => {
+const LoginScreen = ({ navigation }: any) => {
     // TODO: change font family to "Fixel"
     //* TODO: useCallback to interact with zustand
     const [email, setEmail] = React.useState("");
@@ -75,7 +75,7 @@ const LoginScereen = ({ navigation }: any) => {
                             resizeMode: "contain",
                             bottom: 0,
                             //! debug
-                            // display image curner
+                            // display image curner 
                             // borderRadius: 20,
                             // borderColor: "black",
                             // borderWidth: 1,
@@ -191,4 +191,4 @@ const LoginScereen = ({ navigation }: any) => {
     );
 };
 
-export default LoginScereen;
+export default LoginScreen;
