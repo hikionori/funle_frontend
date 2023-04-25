@@ -47,7 +47,7 @@ const ProfileScreen = () => {
                     <Image
                         source={require("../../../../assets/images/logoBig.png")}
                         style={{
-                            top: -100,
+                            top: -200,
                             width: 210,
                             height: 190,
                             resizeMode: "contain",
@@ -64,16 +64,30 @@ const ProfileScreen = () => {
                     }}>
                         <Text
                             style={{
-                                top: -10,
-                                color: "#E67B02",
-                                fontWeight: "500",
-                                fontSize: 40,
+                                top: -160,
+                                color: "#000000",
+                                fontWeight: "300",
+                                fontSize: 30,
                                 fontFamily: "MacPawFixelDisplay-Black",
+                                textAlign: "center",
                             }}
                         >
                             Username
                         </Text>
+                        <Text
+                            style={{
+                                top: -150,
+                                color: "#4D4D4D",
+                                fontWeight: "300",
+                                fontSize: 15,
+                                fontFamily: "MacPawFixelDisplay-Black",
+                                textAlign: "center",
+                            }}
+                        >
+                            mail@gmail.com
+                        </Text>
                     </View>
+
                 </ImageBackground>
            
         </SafeAreaView>
