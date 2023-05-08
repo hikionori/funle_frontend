@@ -1,1 +1,1 @@
-export const baseUrl = "https://9876-78-26-149-230.ngrok-free.app/"; // ngrok url. change every time when you restart ngrok
+export const baseUrl = "https://67d9-78-26-149-230.ngrok-free.app"; // ngrok url. change every time when you restart ngrok
