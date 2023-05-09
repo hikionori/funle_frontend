@@ -4,6 +4,8 @@ import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import LoginScreen from "../screens/LoginScreen";
+import InfoScreen from "../screens/InfoScreen";
+import TestsScreen from "../screens/TestsScreen";
 import useAuthStore from "../../logic/auth";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,6 +18,9 @@ import {MaterialIcons} from "@expo/vector-icons";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
+
+export const InfoNavigation = createNativeStackNavigator(); // Navigation between info screens and home screen
+export const TestsNavigation = createNativeStackNavigator(); // Navigation between tests screens and home screen
 
 export const HomeNavScreens = () => {
     return (
@@ -100,12 +105,46 @@ export const AuthNavScreens = () => {
     );
 };
 
+export const InfoNavScreens = () => {
+    return (
+        <InfoNavigation.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: false,
+                animation: "slide_from_right",
+            }}
+            initialRouteName="Home"
+        >
+            <InfoNavigation.Screen name="Info" component={InfoScreen} />
+            <InfoNavigation.Screen name="Home" component={HomeScreen} />
+        </InfoNavigation.Navigator>
+    )
+}
+
+export const TestsNavScreens = () => {
+    return (
+        <TestsNavigation.Navigator
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: false,
+                animation: "slide_from_right",
+            }}
+            initialRouteName="Home"
+        >
+            <TestsNavigation.Screen name="Tests" component={TestsScreen} />
+            <TestsNavigation.Screen name="Home" component={HomeScreen} />
+        </TestsNavigation.Navigator>
+    )
+}
+
 export const AppNavigation = () => {
     const { loggedIn } = useAuthStore((state: any) => state.loggedIn);
     return (
         <NavigationContainer>
             {/* if loggedIn navigate to home screens, and disable authnavscreens */}
             {loggedIn ? <HomeNavScreens /> : <AuthNavScreens />}
+            <InfoNavScreens />
+            <TestsNavScreens />
         </NavigationContainer>
     );
 };
