@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: "center",
         justifyContent: "center",
+        alignItems: "center",
     },
     subtitle: {
         fontSize: 15,
@@ -19,6 +20,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         alignContent: "center",
         justifyContent: "center",
+    },
+    row: {
+        flexDirection: "row",
     },
 })
 

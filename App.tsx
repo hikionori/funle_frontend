@@ -15,7 +15,7 @@ export default function App() {
     if (loggedIn) {
         return (
             <NavigationContainer>
-                <HomeNavScreens />
+                <AppNavigation />
             </NavigationContainer>
         );
     }
