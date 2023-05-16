@@ -1,16 +1,15 @@
 import {
     View,
     Text,
-    TouchableOpacity,
-    Button,
-    Pressable,
-    ImageBackground,
+    TouchableOpacity, Pressable,
+    ImageBackground
 } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const InfoScreen = ({ navigation }: any) => {
+    // TODO: Add logic
     return (
         <ImageBackground
             source={require("../../../../assets/images/bg.png")}

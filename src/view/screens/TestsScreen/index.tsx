@@ -10,7 +10,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import styles from "./style";
 
+// TODO: Add argument 'id'
 const TestsScreen = ({ navigation }: any) => {
+    // TODO: Add more logic
     useEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
