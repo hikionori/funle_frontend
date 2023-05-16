@@ -1,26 +1,11 @@
 import {
     Text,
     View,
-<<<<<<< HEAD
     SafeAreaView, Image,
     ImageBackground
 } from "react-native";
 
 import React from "react";
-=======
-    SafeAreaView,
-    Button,
-    Image,
-    ImageBackground,
-    TextInput,
-    Pressable,
-    Keyboard,
-    KeyboardAvoidingView,
-} from "react-native";
-
-import React from "react";
-import styles from "./style";
->>>>>>> profile_screen
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 
