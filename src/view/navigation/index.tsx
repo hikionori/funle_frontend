@@ -4,6 +4,8 @@ import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import LoginScreen from "../screens/LoginScreen";
+import InfoScreen from "../screens/InfoScreen";
+import TestsScreen from "../screens/TestsScreen";
 import useAuthStore from "../../logic/auth";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,13 +13,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Ionicons } from "@expo/vector-icons";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {MaterialIcons} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
 
-export const HomeNavScreens = () => {
+export const InfoNavigation = createNativeStackNavigator(); // Navigation between info screens and home screen
+export const TestsNavigation = createNativeStackNavigator(); // Navigation between tests screens and home screen
+
+export const HomeNavScreens = ({ navigation }: any) => {
     return (
         <HomeNavigation.Navigator
             screenOptions={{
@@ -40,7 +46,11 @@ export const HomeNavScreens = () => {
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
                             return (
-                                <MaterialIcons name="home" size={37} color="white" />
+                                <MaterialIcons
+                                    name="home"
+                                    size={37}
+                                    color="white"
+                                />
                             );
                         }
                         return (
@@ -102,10 +112,206 @@ export const AuthNavScreens = () => {
 
 export const AppNavigation = () => {
     const { loggedIn } = useAuthStore((state: any) => state.loggedIn);
+    const Stack = createNativeStackNavigator();
+
     return (
-        <NavigationContainer>
+        <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: false,
+                animation: "fade",
+            }}
+        >
             {/* if loggedIn navigate to home screens, and disable authnavscreens */}
-            {loggedIn ? <HomeNavScreens /> : <AuthNavScreens />}
-        </NavigationContainer>
+
+            <Stack.Screen
+                name="Home"
+                component={HomeNavScreens}
+                options={{
+                    headerShown: true,
+                    headerStyle: {
+                        backgroundColor: "#E67B02",
+                    },
+                    headerTintColor: "#fff",
+                    headerTitle: () => {},
+                    headerLeft: () => (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    fontSize: 20,
+                                }}
+                            >
+                                20
+                            </Text>
+                            <MaterialCommunityIcons
+                                color={"#fff"}
+                                size={20}
+                                name="diamond-stone"
+                            />
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    fontSize: 20,
+                                }}
+                            >
+                                5
+                            </Text>
+                            <MaterialCommunityIcons
+                                color={"#fff"}
+                                size={20}
+                                name="heart"
+                            />
+                        </View>
+                    ),
+                }}
+            />
+            <Stack.Screen
+                name="Info"
+                component={InfoScreen}
+                options={{
+                    headerShown: true,
+                    headerStyle: {
+                        backgroundColor: "#E67B02",
+                    },
+                    headerTintColor: "#fff",
+                    headerTitle: () => {},
+                    headerLeft: () => (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    fontSize: 20,
+                                }}
+                            >
+                                20
+                            </Text>
+                            <MaterialCommunityIcons
+                                color={"#fff"}
+                                size={20}
+                                name="diamond-stone"
+                            />
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "#fff",
+                                    fontSize: 20,
+                                }}
+                            >
+                                5
+                            </Text>
+                            <MaterialCommunityIcons
+                                color={"#fff"}
+                                size={20}
+                                name="heart"
+                            />
+                        </View>
+                    ),
+                }}
+            />
+            <Stack.Screen
+                name="Tests"
+                component={TestsScreen} // Tests dynamic navigation here
+                options={{
+                    headerShown: true,
+                    headerStyle: {
+                        backgroundColor: "#E67B02",
+                    },
+                    headerTintColor: "#fff",
+                    headerTitle: () => {},
+                    headerLeft: () => (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <TouchableOpacity
+                                onPress={() => {
+                                    // go back
+                                }}
+                            >
+                                <MaterialCommunityIcons
+                                    name="arrow-left"
+                                    size={30}
+                                    color="white"
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        color: "#fff",
+                                        fontSize: 20,
+                                    }}
+                                >
+                                    20
+                                </Text>
+                                <MaterialCommunityIcons
+                                    color={"#fff"}
+                                    size={20}
+                                    name="diamond-stone"
+                                />
+                                <Text
+                                    style={{
+                                        color: "#fff",
+                                        fontSize: 20,
+                                    }}
+                                >
+                                    5
+                                </Text>
+                                <MaterialCommunityIcons
+                                    color={"#fff"}
+                                    size={20}
+                                    name="heart"
+                                />
+                            </View>
+                        </View>
+                    ),
+                }}
+            />
+        </Stack.Navigator>
     );
 };
