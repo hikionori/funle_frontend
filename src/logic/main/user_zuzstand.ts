@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import { get_user_info, User, UserProgress } from '../../repository/user_reposytory';
+import { get_user_info, User, UserProgress } from '../../repository/user_repository';
 
 const useUserStore = create((set, get: any) => ({
     user: {} as User,

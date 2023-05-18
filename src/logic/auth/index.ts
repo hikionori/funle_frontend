@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {login, auth, register, UserRole} from '../../repository/user_reposytory';
+import {login, auth, register, UserRole} from '../../repository/user_repository';
 
 const useAuthStore = create((set) => ({
     loggedIn: true,
