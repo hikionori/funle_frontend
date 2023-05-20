@@ -1,4 +1,8 @@
 import { create } from "zustand";
+import useAuthStore from "../auth";
+import { getCourse } from "../../repository/course_repository";
+
+const userToken = useAuthStore((state: any) => state.token)
 
 const useCourse = create((set, get: any) => ({
     id: "", // course id
@@ -37,9 +41,12 @@ const useCourse = create((set, get: any) => ({
 
     // api calls
     getCourse: async (id: string) => {
-        // TODO: get course from api and set it to store
-    },
-    addCourseToUser: async (course_id: string, user_id: string) => {
-        // TODO: add course to user if user not have this course
-    },
+        const course = await getCourse(id, userToken);
+        set({
+            id: course._id.$oid,
+            title: course.title,
+            description: course.description,
+            levels: course.levels,
+        });
+    }
 }));
