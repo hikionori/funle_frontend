@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import useAuthStore from "../auth";
 
 
 
@@ -10,6 +11,7 @@ import { create } from "zustand";
         3. addTestToUser
 */
 
+const token = useAuthStore((state: any) => state.token);
 
 // TODO: think about how to store tests
 const useTests = create((set, get: any) => ({

@@ -76,6 +76,7 @@ const get_user_info = async (token: string) => {
     }
 }
 
+// NOT USED
 const add_course_to_user = async (course_id: string, user_id: string) => {
     // TODO: implement this
 }

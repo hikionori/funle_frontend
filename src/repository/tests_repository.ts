@@ -51,3 +51,5 @@ const getTest = async (testId: string, token: string) => {
     // TESTIT
     return response.data[Object.keys(response.data)[0]];
 };
+
+export { getTest };
