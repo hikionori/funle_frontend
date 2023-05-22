@@ -25,7 +25,6 @@ const LoginScreen = ({ navigation }: any) => {
 
     const [keyboardVisible, setKeyboardVisible] = React.useState(false);
 
-
     const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
     const login: any = useAuthStore((state: any) => state.login);
 

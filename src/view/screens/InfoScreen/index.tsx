@@ -1,14 +1,25 @@
 import {
     View,
     Text,
-    TouchableOpacity, Pressable,
-    ImageBackground
+    TouchableOpacity,
+    Pressable,
+    ImageBackground,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import useInfo from "../../../logic/main/info_zustand";
 
-const InfoScreen = ({ navigation }: any) => {
+const InfoScreen = ({ route, navigation }: any) => {
+    const { id } = route.params;
+    const getInfo = useInfo((state: any) => state.getInfo); // async function
+
+    useEffect(() => {
+        getInfo(id).then((res: any) => {
+            console.log("yay")
+        });
+    }, [id]);
+
     // TODO: Add logic
     return (
         <ImageBackground

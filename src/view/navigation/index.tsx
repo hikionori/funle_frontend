@@ -23,6 +23,20 @@ export const AuthNavigation = createNativeStackNavigator();
 export const InfoNavigation = createNativeStackNavigator(); // Navigation between info screens and home screen
 export const TestsNavigation = createNativeStackNavigator(); // Navigation between tests screens and home screen
 
+
+// params for InfoNavigation
+export type InfoNavigationParams = {
+    id: string
+}
+
+/*
+    Tests is a ids array of tests
+*/
+// params for TestsNavigation = {}
+export type TestsNavigationParams = {
+    tests: string[]
+}
+
 export const HomeNavScreens = ({ navigation }: any) => {
     return (
         <HomeNavigation.Navigator

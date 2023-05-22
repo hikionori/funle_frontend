@@ -62,3 +62,6 @@ const useActiveTest = create((set, get: any) => ({
     // reset
     reset: () => set({ id: "", question: "", answers: [], answer: "" }),
 }));
+
+
+export { useTests, useActiveTest };

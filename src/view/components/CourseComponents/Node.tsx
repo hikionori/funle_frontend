@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 
 interface NodeProps {
+    id: string;
+    ids?: String; // only if type_ === "test"
     title: string;
     mini_image: string; // url
     type_: string; // "info" | "test"
@@ -32,7 +34,7 @@ export default function Node(props: NodeProps) {
     return (
         <TouchableOpacity
             onPress={() => {
-                onClickNode && onClickNode(route);
+                onClickNode && onClickNode(route, {id: props.id} ? type_ === "info" : {ids: props.ids});
             }}
         >
             <View>

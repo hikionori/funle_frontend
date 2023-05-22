@@ -9,9 +9,15 @@ import React, { useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import styles from "./style";
+import { useTests } from "../../../logic/main/tests_zustand";
 
 // TODO: Add argument 'id'
-const TestsScreen = ({ navigation }: any) => {
+const TestsScreen = ({ route, navigation }: any) => {
+
+    const {ids} = route.params;
+
+    const getTestsAPI = useTests((state: any) => state.getTestsAPI);
+
     // TODO: Add more logic
     useEffect(() => {
         navigation.setOptions({
@@ -37,7 +43,12 @@ const TestsScreen = ({ navigation }: any) => {
                 </View>
             ),
         });
-    }, []);
+
+        getTestsAPI(ids).then((res: any) => {
+            console.log("yay")
+        });
+
+    }, [ids]);
 
     return (
         <ImageBackground
