@@ -22,14 +22,15 @@ export default function App() {
         "MacPawFixel-VF": require("./assets/fonts/MacPawFixel/MacPawFixel-VF.ttf"),
     });
 
-    if (!fontLoaded) {
-        return null;
-    }
-
+    
     const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
     useEffect(() => {
         console.log("loggedIn", loggedIn);
     }, [loggedIn]);
+    
+    if (!fontLoaded) {
+        return null;
+    }
     return (
         <NavigationContainer>
             {loggedIn ? <AppNavigation /> : <AuthNavScreens />}
