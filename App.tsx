@@ -14,7 +14,18 @@ import useAuthStore from "./src/logic/auth";
 import { useFonts } from "expo-font";
 
 export default function App() {
-    const [fontLoaded] = useFonts({});
+    const [fontLoaded] = useFonts({
+        "MacPawFixelDisplay-Black": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
+        "MacPawFixelDisplay-Bold": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
+        "MacPawFixelDisplay-Medium": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
+        "MacPawFixelText-Regular": require("./assets/fonts/MacPawFixelText/OpenType-TT/MacPawFixelText-Regular.ttf"),
+        "MacPawFixel-VF": require("./assets/fonts/MacPawFixel/MacPawFixel-VF.ttf"),
+    });
+
+    if (!fontLoaded) {
+        return null;
+    }
+
     const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
     useEffect(() => {
         console.log("loggedIn", loggedIn);

@@ -32,11 +32,11 @@ const LoginScreen = ({ navigation }: any) => {
     const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
     // console.log("loggedIn", loggedIn); //! debug
 
-    const [fontLoaded] = useFonts({
-        "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
-        "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
-    });
+    // const [fontLoaded] = useFonts({
+    //     "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
+    //     "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
+    //     "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
+    // });
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {
@@ -47,9 +47,9 @@ const LoginScreen = ({ navigation }: any) => {
         });
     }, []);
 
-    if (!fontLoaded) {
-        return null;
-    }
+    // if (!fontLoaded) {
+    //     return null;
+    // }
 
     return (
         <SafeAreaView>
