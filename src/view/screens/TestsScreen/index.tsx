@@ -9,14 +9,24 @@ import React, { useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import styles from "./style";
-import { useTests } from "../../../logic/main/tests_zustand";
+import { useActiveTest, useTests } from "../../../logic/main/tests_zustand";
 
 // TODO: Add argument 'id'
 const TestsScreen = ({ route, navigation }: any) => {
+    const { ids } = route.params;
 
-    const {ids} = route.params;
+    const [getTestsAPI, getTest] = useTests(
+        (state: any) => state.getTestsAPI,
+        (state: any) => state.getTest
+    );
 
-    const getTestsAPI = useTests((state: any) => state.getTestsAPI);
+    const setTest = useActiveTest((state: any) => state.setTest);
+
+    const { question, answers, answer } = useActiveTest((state: any) => ({
+        question: state.question,
+        answers: state.answers,
+        answer: state.answer,
+    }));
 
     // TODO: Add more logic
     useEffect(() => {
@@ -45,10 +55,12 @@ const TestsScreen = ({ route, navigation }: any) => {
         });
 
         getTestsAPI(ids).then((res: any) => {
-            console.log("yay")
+            console.log("yay");
         });
 
-    }, [ids]);
+        let test = getTest();
+        setTest(test);
+    }, []);
 
     return (
         <ImageBackground

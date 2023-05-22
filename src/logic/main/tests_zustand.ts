@@ -37,8 +37,17 @@ const useTests = create((set, get: any) => ({
         */
     },
 
+    // FIXME: transfer to user_zustand
     addTestToUser: async (test_id: string, user_id: string) => {
         // TODO: add test to user if user not have this test
+    },
+
+    // i`m not sure about this but i wrote it
+    getTest: () => {
+        // get first test from tests and delete it
+        const test = get().tests[0];
+        set({ tests: get().tests.slice(1) });
+        return test;
     }
 
 }));
