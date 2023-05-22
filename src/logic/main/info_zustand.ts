@@ -31,11 +31,6 @@ const useInfo = create((set, get: any) => ({
             content_levels: info.content_levels
         });
     },
-
-    // FIXME: transfer to user_zustand
-    addInfoToUser: async (info_id: string, user_id: string) => {
-        // TODO: add info to user if user not have this info
-    },
 }));
 
 export default useInfo;

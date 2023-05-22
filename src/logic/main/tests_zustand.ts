@@ -37,7 +37,7 @@ const useTests = create((set, get: any) => ({
         */
     },
 
-    // FIXME: transfer to user_zustand
+    //? FIXME: transfer to user_zustand
     addTestToUser: async (test_id: string, user_id: string) => {
         // TODO: add test to user if user not have this test
     },

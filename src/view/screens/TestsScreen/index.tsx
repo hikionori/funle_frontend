@@ -30,6 +30,7 @@ const TestsScreen = ({ route, navigation }: any) => {
 
     // TODO: Add more logic
     useEffect(() => {
+        //* no functional block
         navigation.setOptions({
             headerLeft: () => (
                 <View
@@ -53,6 +54,7 @@ const TestsScreen = ({ route, navigation }: any) => {
                 </View>
             ),
         });
+        //*
 
         getTestsAPI(ids).then((res: any) => {
             console.log("yay");
