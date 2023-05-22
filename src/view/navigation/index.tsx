@@ -126,7 +126,7 @@ export const AppNavigation = () => {
             {/* if loggedIn navigate to home screens, and disable authnavscreens */}
 
             <Stack.Screen
-                name="Home"
+                name="MainScreen"
                 component={HomeNavScreens}
                 options={{
                     headerShown: true,
