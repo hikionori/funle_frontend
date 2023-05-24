@@ -32,7 +32,7 @@ const TestsScreen = ({ route, navigation }: any) => {
                     <TouchableOpacity
                         onPress={() => {
                             // go back
-                            navigation.goBack();
+                            navigation.navigate("MainScreen");
                         }}
                     >
                         <MaterialCommunityIcons

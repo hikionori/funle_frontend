@@ -3,9 +3,12 @@ import React, { useEffect } from "react";
 import styles from "./style";
 import Node from "../../components/CourseComponents/Node";
 
+
 const HomeScreen = ({ navigation }: any) => {
     const onNodePress = (type_: string, params: any) => {
-        navigation.navigate(type_, params);
+        if (type_ === "test") {}
+        if (type_ === "info") {}
+        navigation.navigate(type_);
     };
 
     // TODO: rewrite this

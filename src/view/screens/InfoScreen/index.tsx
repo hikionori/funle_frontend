@@ -1,248 +1,90 @@
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    Pressable,
-    ImageBackground,
+  View,
+  Text,
+  TouchableOpacity,
+  Pressable,
+  ImageBackground,
+  ScrollView,
 } from "react-native";
 import React, { useEffect } from "react";
 import styles from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useInfo from "../../../logic/main/info_zustand";
+import ContentNode from "../../components/InfosComponents/ContentNode";
+import NodeLevel from "../../components/InfosComponents/NodeLevel";
+import LevelTreeInfo from "../../components/InfosComponents/LevelTree";
 
 const InfoScreen = ({ route, navigation }: any) => {
-    // after clicking on the cell, we get the data from the cell and pass it to the InfoScreen
-    const {id, title, description, content_levels} = route.params;
+  // FIXME: Странно но с useState не работает
+  const static_content_levels = [
+    [
+      0,
+      [
+        {
+          content_type: "text",
+          data: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+        },
+        {
+          content_type: "image",
+          data: "https://picsum.photos/200/300",
+        },
+      ],
+    ],
+    [
+      1,
+      [
+        {
+          content_type: "text",
+          data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
+        },
+        {
+          content_type: "image",
+          data: "https://picsum.photos/200/300",
+        },
+      ],
+    ],
+  ];
 
-    // TODO: Add logic
-    return (
-        <ImageBackground
-            source={require("../../../../assets/images/bg.png")}
-            style={{
-                flex: 1,
-            }}
+  // TODO: Add logic
+  return (
+    <ImageBackground
+      source={require("../../../../assets/images/bg.png")}
+      style={{
+        flex: 1,
+      }}
+    >
+      <ScrollView
+        style={{
+          flex: 1,
+        }}
+        contentContainerStyle={{
+          paddingBottom: 50,
+        }}
+      >
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Hello world</Text>
+        </View>
+        {/* <NodeLevel index={0} nodes={content_levels[0][1]} />
+        <NodeLevel index={1} nodes={content_levels[1][1]} />
+        <NodeLevel index={0} nodes={content_levels[0][1]} />
+        <NodeLevel index={0} nodes={content_levels[0][1]} />
+        <NodeLevel index={0} nodes={content_levels[1][1]} />
+        <NodeLevel index={0} nodes={content_levels[0][1]} />
+         */}
+        <LevelTreeInfo content_levels={static_content_levels} />
+      </ScrollView>
+      <View style={styles.footer}>
+        <TouchableOpacity
+          onPress={() => {
+            // go back
+            navigation.goBack();
+          }}
         >
-            <View style={styles.container}>
-                <Text
-                    style={{
-                        // All caps
-                        textTransform: "uppercase",
-                        fontSize: 30,
-                        fontWeight: "900",
-                        color: "#E67B02",
-                    }}
-                >
-                    multiplication by 2
-                </Text>
-                <View
-                    style={{
-                        marginTop: 50,
-                    }}
-                >
-                    <View>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            Table:
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 1 = 2
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 2 = 4
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 3 = 6
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 4 = 8
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 5 = 10
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 6 = 12
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 7 = 14
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 8 = 16
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 9 = 18
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            2 × 10 = 20
-                        </Text>
-                    </View>
-                    <View>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            The basic things to observe in 2 table are:
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            Table of 2 follows the pattern of 2, 4, 6, 8, 0 at
-                            one's digit place.
-                        </Text>
-                        <Text
-                            style={{
-                                fontWeight: "bold",
-                                fontSize: 20,
-                            }}
-                        >
-                            <MaterialCommunityIcons
-                                name="circle-small"
-                                size={25}
-                            />
-                            It always has even numbers.
-                        </Text>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity
-                    onPress={() => {
-                        // go back
-                        navigation.goBack();
-                    }}
-                >
-                    <MaterialCommunityIcons
-                        name="arrow-left"
-                        size={30}
-                        color="white"
-                    />
-                </TouchableOpacity>
-                <Pressable
-                    style={{
-                        backgroundColor: "white",
-                        width: 280,
-                        height: 40,
-                        borderRadius: 20,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                    onPress={() => navigation.navigate("Tests")}
-                >
-                    <Text
-                        style={{
-                            color: "#E67B02",
-                            fontWeight: "bold",
-                            fontSize: 20,
-                        }}
-                    >
-                        Go to test
-                    </Text>
-                </Pressable>
-            </View>
-        </ImageBackground>
-    );
+          <MaterialCommunityIcons name="arrow-left" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
+  );
 };
 
 export default InfoScreen;
