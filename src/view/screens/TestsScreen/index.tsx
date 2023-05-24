@@ -13,20 +13,10 @@ import { useActiveTest, useTests } from "../../../logic/main/tests_zustand";
 
 // TODO: Add argument 'id'
 const TestsScreen = ({ route, navigation }: any) => {
-    const { ids } = route.params;
-
-    const [getTestsAPI, getTest] = useTests(
-        (state: any) => state.getTestsAPI,
-        (state: any) => state.getTest
-    );
-
-    const setTest = useActiveTest((state: any) => state.setTest);
-
-    const { question, answers, answer } = useActiveTest((state: any) => ({
-        question: state.question,
-        answers: state.answers,
-        answer: state.answer,
-    }));
+    // after clicking on the cell, we get the ids from the cell and pass it to useTests hook, 
+    // next in useTests hook we get all tests by ids, after we pop first test and pass it to the useActiveTest hook, 
+    // and then we get data from useActiveTest hook and pass it to the TestScreen
+    const {id, theme, question, answers, answer} = route.params;
 
     // TODO: Add more logic
     useEffect(() => {
@@ -55,13 +45,6 @@ const TestsScreen = ({ route, navigation }: any) => {
             ),
         });
         //*
-
-        getTestsAPI(ids).then((res: any) => {
-            console.log("yay");
-        });
-
-        let test = getTest();
-        setTest(test);
     }, []);
 
     return (

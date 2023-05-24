@@ -11,14 +11,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useInfo from "../../../logic/main/info_zustand";
 
 const InfoScreen = ({ route, navigation }: any) => {
-    const { id } = route.params;
-    const getInfo = useInfo((state: any) => state.getInfo); // async function
-
-    useEffect(() => {
-        getInfo(id).then((res: any) => {
-            console.log("yay")
-        });
-    }, [id]);
+    // after clicking on the cell, we get the data from the cell and pass it to the InfoScreen
+    const {id, title, description, content_levels} = route.params;
 
     // TODO: Add logic
     return (
