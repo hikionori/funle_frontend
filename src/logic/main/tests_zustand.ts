@@ -11,8 +11,6 @@ import useAuthStore from "../auth";
         3. addTestToUser
 */
 
-const token = useAuthStore((state: any) => state.token);
-
 // TODO: think about how to store tests
 const useTests = create((set, get: any) => ({
     // all tests data
@@ -28,18 +26,13 @@ const useTests = create((set, get: any) => ({
     reset: () => set({ ids: [], tests: [] }),
 
     // api calls
-    getTestsAPI: async (ids: string[]) => {
+    getTestsAPI: async (ids: string[], token: string) => {
         // TODO: get tests from api and set it to store
         /*
             For each id in ids:
                 get test from api
                 add test to tests
         */
-    },
-
-    //? FIXME: transfer to user_zustand
-    addTestToUser: async (test_id: string, user_id: string) => {
-        // TODO: add test to user if user not have this test
     },
 
     // i`m not sure about this but i wrote it

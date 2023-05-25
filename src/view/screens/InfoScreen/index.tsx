@@ -15,7 +15,11 @@ import NodeLevel from "../../components/InfosComponents/NodeLevel";
 import LevelTreeInfo from "../../components/InfosComponents/LevelTree";
 
 const InfoScreen = ({ route, navigation }: any) => {
-  // FIXME: Странно но с useState не работает
+  const title = useInfo((state: any) => state.title);
+  const content_levels = useInfo((state: any) => state.content_levels);
+
+  const {setTitle, setContentLevels} = useInfo((state: any) => ({setTitle: state.setTitle, setContentLevels: state.setContentLevels}));
+
   const static_content_levels = [
     [
       0,
@@ -45,6 +49,11 @@ const InfoScreen = ({ route, navigation }: any) => {
     ],
   ];
 
+  useEffect(() => {
+    setTitle("Hello");
+    setContentLevels(static_content_levels);
+  }, []);
+
   // TODO: Add logic
   return (
     <ImageBackground
@@ -62,16 +71,9 @@ const InfoScreen = ({ route, navigation }: any) => {
         }}
       >
         <View style={styles.header}>
-          <Text style={styles.headerText}>Hello world</Text>
+          <Text style={styles.headerText}>{title}</Text>
         </View>
-        {/* <NodeLevel index={0} nodes={content_levels[0][1]} />
-        <NodeLevel index={1} nodes={content_levels[1][1]} />
-        <NodeLevel index={0} nodes={content_levels[0][1]} />
-        <NodeLevel index={0} nodes={content_levels[0][1]} />
-        <NodeLevel index={0} nodes={content_levels[1][1]} />
-        <NodeLevel index={0} nodes={content_levels[0][1]} />
-         */}
-        <LevelTreeInfo content_levels={static_content_levels} />
+        <LevelTreeInfo content_levels={content_levels} />
       </ScrollView>
       <View style={styles.footer}>
         <TouchableOpacity

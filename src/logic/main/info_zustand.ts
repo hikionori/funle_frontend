@@ -1,8 +1,9 @@
 import { create } from "zustand";
+
 import useAuthStore from "../auth";
 import { getInfo } from "../../repository/info_repository";
 
-const token = useAuthStore((state: any) => state.token);
+// const token = useAuthStore((state: any) => state.token);
 
 const useInfo = create((set, get: any) => ({
   id: "", // info id
@@ -10,8 +11,12 @@ const useInfo = create((set, get: any) => ({
   content_levels: [], // info content_levels
 
   // setters
-  setId: (id: string) => set({ id: id }),
-  setTitle: (title: string) => set({ title: title }),
+  setId: (id: string) => {
+    set({ id: id });
+  },
+  setTitle: (title: string) => {
+    set({ title: title });
+  },
   setContentLevels: (content_levels: Array<any>) => {
     set({ content_levels: content_levels });
   },
@@ -25,7 +30,7 @@ const useInfo = create((set, get: any) => ({
   reset: () => set({ id: "", title: "", content_levels: [] }),
 
   // api calls
-  getInfo: async (id: string) => {
+  getInfo: async (id: string, token: string) => {
     const info = await getInfo(id, token);
     set({
       id: info._id.$oid,
