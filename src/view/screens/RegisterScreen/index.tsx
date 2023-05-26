@@ -22,11 +22,11 @@ const RegisterScreen = ({ navigation }: any) => {
     const [keyboardVisible, setKeyboardVisible] = React.useState(false);
     const register: any = useAuthStore((state: any) => state.register);
 
-    const [fontLoaded] = useFonts({
-        "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
-        "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
-    });
+    // const [fontLoaded] = useFonts({
+    //     "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
+    //     "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
+    //     "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
+    // });
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {
@@ -39,9 +39,9 @@ const RegisterScreen = ({ navigation }: any) => {
         // loadFontAsync();
     }, []);
 
-    if (!fontLoaded) {
-        return null;
-    }
+    // if (!fontLoaded) {
+    //     return null;
+    // }
 
     return (
         <View>

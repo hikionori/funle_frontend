@@ -16,9 +16,8 @@ import { StatusBar } from "expo-status-bar";
 
 import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
-import { useFonts } from "expo-font";
 
-const LoginScereen = ({ navigation }: any) => {
+const LoginScreen = ({ navigation }: any) => {
     // TODO: change font family to "Fixel"
     //* TODO: useCallback to interact with zustand
     const [email, setEmail] = React.useState("");
@@ -30,13 +29,6 @@ const LoginScereen = ({ navigation }: any) => {
     const login: any = useAuthStore((state: any) => state.login);
 
     const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
-    // console.log("loggedIn", loggedIn); //! debug
-
-    const [fontLoaded] = useFonts({
-        "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
-        "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
-    });
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {
@@ -46,10 +38,6 @@ const LoginScereen = ({ navigation }: any) => {
             setKeyboardVisible(false);
         });
     }, []);
-
-    if (!fontLoaded) {
-        return null;
-    }
 
     return (
         <SafeAreaView>
@@ -81,9 +69,11 @@ const LoginScereen = ({ navigation }: any) => {
                             // borderWidth: 1,
                         }}
                     />
-                    <View style={{
-                        flexDirection: "row",
-                    }}>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                        }}
+                    >
                         <Text
                             style={{
                                 top: -50,
@@ -191,4 +181,4 @@ const LoginScereen = ({ navigation }: any) => {
     );
 };
 
-export default LoginScereen;
+export default LoginScreen;
