@@ -2,7 +2,7 @@ import { create } from "zustand";
 import useAuthStore from "../auth";
 import { getCourse } from "../../repository/course_repository";
 
-const userToken = useAuthStore((state: any) => state.token)
+// const userToken = useAuthStore((state: any) => state.token)
 
 const useCourse = create((set, get: any) => ({
     id: "", // course id
@@ -40,13 +40,17 @@ const useCourse = create((set, get: any) => ({
     reset: () => set({ id: "", title: "", description: "", levels: [] }),
 
     // api calls
-    getCourse: async (id: string) => {
-        const course = await getCourse(id, userToken);
+    getCourse: async (id: string, token: string) => {
+        const course = await getCourse(id, token);
+        // TODO: sort levels
         set({
             id: course._id.$oid,
             title: course.title,
             description: course.description,
             levels: course.levels,
         });
-    }
+    },
+
 }));
+
+export default useCourse;

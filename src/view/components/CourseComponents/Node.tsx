@@ -3,12 +3,12 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 
 interface NodeProps {
   id: string;
-  ids?: String; // only if type_ === "test"
+  ids: string[]; // only if type_ === "test"
   title: string;
   mini_image: string; // url
   type_: string; // "info" | "test"
   n_of_tests?: number; // only if type_ === "test"
-  onNodePress?: Function;
+  onNodePress: Function;
 }
 
 export default function Node(props: NodeProps) {

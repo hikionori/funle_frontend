@@ -14,12 +14,13 @@ import ContentNode from "../../components/InfosComponents/ContentNode";
 import NodeLevel from "../../components/InfosComponents/NodeLevel";
 import LevelTreeInfo from "../../components/InfosComponents/LevelTree";
 
-const InfoScreen = ({ route, navigation }: any) => {
+const InfoScreen = ({ navigation }: any) => {
   const title = useInfo((state: any) => state.title);
   const content_levels = useInfo((state: any) => state.content_levels);
 
   const {setTitle, setContentLevels} = useInfo((state: any) => ({setTitle: state.setTitle, setContentLevels: state.setContentLevels}));
 
+  //! debug only
   const static_content_levels = [
     [
       0,

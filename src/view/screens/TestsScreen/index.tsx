@@ -16,7 +16,7 @@ const TestsScreen = ({ route, navigation }: any) => {
     // after clicking on the cell, we get the ids from the cell and pass it to useTests hook, 
     // next in useTests hook we get all tests by ids, after we pop first test and pass it to the useActiveTest hook, 
     // and then we get data from useActiveTest hook and pass it to the TestScreen
-    const {id, theme, question, answers, answer} = route.params;
+    const {id, question, answers, answer} = route.params;
 
     // TODO: Add more logic
     useEffect(() => {
