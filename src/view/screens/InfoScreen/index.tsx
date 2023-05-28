@@ -50,7 +50,6 @@ const InfoScreen = ({ navigation }: any) => {
     ],
   ];
 
-  //! debug only
   useEffect(() => {
     setTitle("Hello");
     setContentLevels(static_content_levels);
@@ -82,7 +81,7 @@ const InfoScreen = ({ navigation }: any) => {
         <TouchableOpacity
           onPress={() => {
             // go back
-            navigation.navigate("MainScreen");
+            navigation.goBack();
           }}
         >
           <MaterialCommunityIcons name="arrow-left" size={30} color="white" />
