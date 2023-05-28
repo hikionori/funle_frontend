@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         color: "grey",
     },
     footer: {
-        bottom: 10,
+        bottom: 20,
         position: "absolute",
         alignSelf: "center",
         width: '50%',

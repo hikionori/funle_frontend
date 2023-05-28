@@ -74,6 +74,7 @@ const TestsScreen = ({ route, navigation }: any) => {
                         <View style={styles.box} />
                     </View>
                     <View>
+                        {/* //* Question text **/ }
                         <Text style={styles.question}>2 × 2 = ?</Text>
 
                         <Text

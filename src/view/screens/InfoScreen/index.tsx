@@ -68,6 +68,7 @@ const InfoScreen = ({ navigation }: any) => {
           flex: 1,
         }}
         contentContainerStyle={{
+          paddingTop: 30,
           paddingBottom: 50,
         }}
       >
