@@ -15,18 +15,34 @@ interface Test {
     id: string,
     question: string,
     answers: string[],
-    answer: string
+    answer: string,
+    level: number,
 }
 
 // TODO: think about how to store tests
 const useTests = create((set, get: any) => ({
     // all tests data
-    tests: [], // tests
+    tests: [
+        {
+            id: "1",
+            question: "2 + 2 = ?",
+            answers: ["1", "2", "3", "4"],
+            answer: "4",
+            level: 1,
+        },
+        {
+            id: "2",
+            question: "2 * 2 + 2 = ?",
+            answers: ["2*2+2"],
+            answer: "6",
+            level: 2,
+        },
+    ] as Test[], // tests
     activeTestIndex: 0, // index of active test
     progress: [], // tests progress. 0 - not passed, 1 - passed, undefined - not passed yet
 
     // setters
-    setTests: (tests: any) => set({ tests: tests }),
+    setTests: (tests: Test[]) => set({ tests: tests }),
     setActiveTestIndex: (index: number) => set({ activeTestIndex: index }),
     setProgressByIndex: (index: number, value: number) => {
         const progress = get().progress;
