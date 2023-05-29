@@ -2,12 +2,15 @@ import {
     Text,
     View,
     SafeAreaView, Image,
-    ImageBackground
+    ImageBackground,
+    Button
 } from "react-native";
 
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
+
+import useAuthStore from "../../../logic/auth";
 
 
 const ProfileScreen = () => {
@@ -17,6 +20,8 @@ const ProfileScreen = () => {
         "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
         "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
     });
+
+    const { logout } = useAuthStore((state: any) => ({logout: state.logout}));
 
     if (!fontLoaded) {
         return null;
@@ -79,6 +84,14 @@ const ProfileScreen = () => {
                         >
                             mail@gmail.com
                         </Text>
+                    </View>
+                    <View style={{}}>
+                        {/* Button for logout */}
+                        <Button
+                            title="Logout"
+                            color="#FFC700"
+                            onPress={() => logout()}
+                        />
                     </View>
 
                 </ImageBackground>

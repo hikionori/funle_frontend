@@ -28,7 +28,7 @@ const useTests = create((set, get: any) => ({
             question: "2 + 2 = ?",
             answers: ["1", "2", "3", "4"],
             answer: "4",
-            level: 1,
+            level: 2,
         },
         {
             id: "2",

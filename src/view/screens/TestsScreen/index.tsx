@@ -40,7 +40,8 @@ const TestsScreen = ({ navigation }: any) => {
 			progress[activeTestIndex] = 1;
             // TODO: next test
 		} else {
-			
+			progress[activeTestIndex] = 0;
+			// TODO: next test
 		}
 		// TODO: change active test, and go to the next test
 	};
@@ -54,9 +55,10 @@ const TestsScreen = ({ navigation }: any) => {
 		});
 	}, []);
 
-    useEffect(() => {
-        console.log("answer " + answer)
-    }, [answer])
+	//! debug
+    // useEffect(() => {
+    //     console.log("answer " + answer)
+    // }, [answer])
 
 	// TODO: Add more logic
 	useEffect(() => {

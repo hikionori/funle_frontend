@@ -24,9 +24,10 @@ export default function App() {
   });
 
   const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
-  useEffect(() => {
-    console.log("loggedIn", loggedIn);
-  }, [loggedIn]);
+  //! debug
+  // useEffect(() => {
+  //   console.log("loggedIn", loggedIn);
+  // }, [loggedIn]);
 
   if (!fontLoaded) {
     return null;
