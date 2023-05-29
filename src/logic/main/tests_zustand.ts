@@ -28,7 +28,7 @@ const useTests = create((set, get: any) => ({
             question: "2 + 2 = ?",
             answers: ["1", "2", "3", "4"],
             answer: "4",
-            level: 2,
+            level: 1,
         },
         {
             id: "2",
@@ -42,7 +42,7 @@ const useTests = create((set, get: any) => ({
     progress: [], // tests progress. 0 - not passed, 1 - passed, undefined - not passed yet
 
     // setters
-    setTests: (tests: Test[]) => set({ tests: tests }),
+    setTests: (tests: any) => set({ tests: tests }),
     setActiveTestIndex: (index: number) => set({ activeTestIndex: index }),
     setProgressByIndex: (index: number, value: number) => {
         const progress = get().progress;

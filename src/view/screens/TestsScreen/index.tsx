@@ -4,15 +4,13 @@ import {
 	TouchableOpacity,
 	Button,
 	ImageBackground,
-	Keyboard,
+    Keyboard,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import styles from "./style";
 import useTests from "../../../logic/main/tests_zustand";
-import Option from "../../components/TestsComponents/option";
-import { TextArea, TextField } from "native-base";
 
 // TODO: Add argument 'id'
 const TestsScreen = ({ navigation }: any) => {
@@ -27,10 +25,10 @@ const TestsScreen = ({ navigation }: any) => {
 		: null;
 	const progress = useTests((state: any) => state.progress);
 
-	// setters
-	const setProgress = useTests((state: any) => state.setProgress);
+    // setters
+    const setProgress = useTests((state: any) => state.setProgress);
 
-	const [answer, setAnswer] = useState(""); // value of the answer
+    const answer = useState(); // value of the answer
 
 	const [keyboardVisible, setKeyboardVisible] = useState(false);
 
@@ -88,8 +86,9 @@ const TestsScreen = ({ navigation }: any) => {
 		});
 		//*
 
-		// fill progress array with two 0, 3 1 and 2 undefined
-		setProgress([0, 0, 1, 1, 1, undefined, undefined]);
+        // fill progress array with two 0, 3 1 and 2 undefined
+        setProgress([0, 0, 1, 1, 1, undefined, undefined]);
+
 	}, []);
 
 	return (
@@ -106,44 +105,43 @@ const TestsScreen = ({ navigation }: any) => {
 			>
 				<View style={styles.container}>
 					<View style={styles.boxGroup}>
-						{progress.map((item: any, index: number) => {
-							return (
-								<View
-									key={index}
-									style={
-										// if item is 1, then show green box, else if 0 show red box, else show grey box
-										item === 1
-											? styles.boxChecked
-											: item === 0
-											? styles.boxUnchecked
-											: styles.box
-									}
-								>
-									{
-										// if item is 1, then show check icon, else if 0 show cross icon, else show nothing
-										item === 1 ? (
-											<MaterialCommunityIcons
-												name="check"
-												size={15}
-												color="white"
-											/>
-										) : item === 0 ? (
-											<MaterialCommunityIcons
-												name="close"
-												size={15}
-												color="white"
-											/>
-										) : null
-									}
-								</View>
-							);
-						})}
+						{ progress.map((item: any, index: number) => {
+                            return (
+                                <View
+                                    key={index}
+                                    style={
+                                        // if item is 1, then show green box, else if 0 show red box, else show grey box
+                                        item === 1 ? (
+                                            styles.boxChecked
+                                        ) : item === 0 ? (
+                                            styles.boxUnchecked
+                                        ) : (
+                                            styles.box
+                                        )
+                                    }
+                                >
+                                    { // if item is 1, then show check icon, else if 0 show cross icon, else show nothing 
+                                        item === 1 ? (
+                                            <MaterialCommunityIcons
+                                                name="check"
+                                                size={15}
+                                                color="white"
+                                            />
+                                        ) : item === 0 ? (
+                                            <MaterialCommunityIcons
+                                                name="close"
+                                                size={15}
+                                                color="white"
+                                            />
+                                        ) : null   
+                                    }
+                                </View>
+                            );
+                        }) }
 					</View>
 					<View>
 						{/* //* Question text **/}
-						<Text style={styles.question}>
-							{activeTest.question}
-						</Text>
+						<Text style={styles.question}>2 × 2 = ?</Text>
 
 						<Text
 							style={{
@@ -154,55 +152,67 @@ const TestsScreen = ({ navigation }: any) => {
 							Choose the right option:
 						</Text>
 						{/* //* Options **/}
-						{activeTest.level === 1 ? (
-							<View style={styles.options}>
-								{activeTest.answers.map(
-									(item: any, index: number) => {
-										return (
-											<Option
-												key={index}
-												label={item}
-												value={item}
-												onPress={setAnswer}
-											/>
-										);
-									}
-								)}
-							</View>
-						) : activeTest.level === 2 ? (
-							<View style={styles.options}>
-								<TextArea
-									placeholder="Write your answer here"
-									autoCompleteType={"on"}
-									autoCorrect={false}
-									borderColor={"#E67B02"}
-									backgroundColor={"white"}
-									onChangeText={(text) => {
-										setAnswer(text);
+						<View style={styles.options}>
+							<TouchableOpacity style={styles.option}>
+								<MaterialCommunityIcons
+									name="circle-outline"
+									size={30}
+									style={{
+										marginLeft: 10,
+										marginRight: 10,
 									}}
-									h={200}
 								/>
-							</View>
-						) : null}
+								<Text style={styles.optionText}>2</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.option}>
+								<MaterialCommunityIcons
+									name="circle-outline"
+									size={30}
+									style={{
+										marginLeft: 10,
+										marginRight: 10,
+									}}
+								/>
+								<Text style={styles.optionText}>4</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.option}>
+								<MaterialCommunityIcons
+									name="circle-outline"
+									size={30}
+									style={{
+										marginLeft: 10,
+										marginRight: 10,
+									}}
+								/>
+								<Text style={styles.optionText}>6</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.option}>
+								<MaterialCommunityIcons
+									name="circle-outline"
+									size={30}
+									style={{
+										marginLeft: 10,
+										marginRight: 10,
+									}}
+								/>
+								<Text style={styles.optionText}>5</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
-				{
-                    // if keyboard is visible, then hide footer, else show footer
-                    keyboardVisible ? null :
-					<View style={styles.footer}>
-						<TouchableOpacity style={styles.btn}>
-							<Text
-								style={{
-									color: "white",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
-							>
-								Answer
-							</Text>
-						</TouchableOpacity>
-					</View>
-				}
+				<View style={styles.footer}>
+					<TouchableOpacity style={styles.btn}>
+						<Text
+							style={{
+								color: "white",
+								fontWeight: "bold",
+								fontSize: 20,
+							}}
+						>
+							Answer
+						</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</ImageBackground>
 	);
