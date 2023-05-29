@@ -48,6 +48,16 @@ const InfoScreen = ({ navigation }: any) => {
         },
       ],
     ],
+    [
+      2,
+      [
+        {
+          content_type: "text",
+          data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
+        },
+      ],
+      
+    ],
   ];
 
   useEffect(() => {
@@ -81,7 +91,7 @@ const InfoScreen = ({ navigation }: any) => {
         <TouchableOpacity
           onPress={() => {
             // go back
-            navigation.goBack();
+            navigation.navigate("MainScreen");
           }}
         >
           <MaterialCommunityIcons name="arrow-left" size={30} color="white" />

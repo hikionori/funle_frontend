@@ -62,6 +62,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    boxUnchecked: {
+        width: 21,
+        height: 21,
+        backgroundColor: 'red',
+        borderRadius: 5,
+        borderWidth: 1,
+        marginVertical: 10,
+        marginHorizontal: 10,
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     boxGroup: {
         flexDirection: 'row',
         justifyContent: "space-around"

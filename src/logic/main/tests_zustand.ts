@@ -11,13 +11,29 @@ import useAuthStore from "../auth";
         3. addTestToUser
 */
 
+interface Test {
+    id: string,
+    question: string,
+    answers: string[],
+    answer: string
+}
+
 // TODO: think about how to store tests
 const useTests = create((set, get: any) => ({
     // all tests data
     tests: [], // tests
+    activeTestIndex: 0, // index of active test
+    progress: [], // tests progress. 0 - not passed, 1 - passed, undefined - not passed yet
 
     // setters
     setTests: (tests: any) => set({ tests: tests }),
+    setActiveTestIndex: (index: number) => set({ activeTestIndex: index }),
+    setProgressByIndex: (index: number, value: number) => {
+        const progress = get().progress;
+        progress[index] = value;
+        set({ progress: progress });
+    },
+    setProgress: (progress: any[]) => set({ progress: progress }),
 
     // getters
     getTests: () => get().tests,
@@ -32,38 +48,26 @@ const useTests = create((set, get: any) => ({
             For each id in ids:
                 get test from api
                 add test to tests
+            for length of tests:
+                add undefined to progress
+            
+            example:
+                ids = ["1", "2", "3"]
+                progress = [undefined, undefined, undefined]
+            
         */
     },
 
     // i`m not sure about this but i wrote it
-    getTest: () => {
+    getTest: (index: number) => {
         // get first test from tests and delete it
-        const test = get().tests[0];
-        set({ tests: get().tests.slice(1) });
+        const test = get().tests[index];
+        const tests = get().tests;
+        tests.splice(index, 1);
+        set({ tests: tests });
         return test;
     }
 
 }));
 
-const useActiveTest = create((set, get: any) => ({
-    // active test data
-    id: "", // test id
-    question: "", // test title
-    answers: [], // test answer variants
-    answer: "", // test correct answer
-
-    // constructor
-    setTest: (test: any) => set({ id: test.id, question: test.question, answers: test.answers, answer: test.answer }),
-
-    // getters
-    getId: () => get().id,
-    getQuestion: () => get().question,
-    getAnswers: () => get().answers,
-    getAnswer: () => get().answer,
-
-    // reset
-    reset: () => set({ id: "", question: "", answers: [], answer: "" }),
-}));
-
-
-export { useTests, useActiveTest };
+export default useTests;
