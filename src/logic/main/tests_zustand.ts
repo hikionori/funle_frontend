@@ -16,7 +16,7 @@ interface Test {
     question: string,
     answers: string[],
     answer: string,
-    level: number,
+    level: number
 }
 
 // TODO: think about how to store tests
