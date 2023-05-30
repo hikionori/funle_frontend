@@ -168,7 +168,7 @@ const TestsScreen = ({ navigation }: any) => {
 										actions.map(
 											(item: any, index: number) => {
 												return (
-													// похуй оно работает
+													//!@ts-ignore
 													<TextField
 														key={index}
 														placeholder="Enter action"
