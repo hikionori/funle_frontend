@@ -19,6 +19,11 @@ interface Test {
     level: number
 }
 
+export enum TestState {
+    Next,
+    Stop
+}
+
 // TODO: think about how to store tests
 const useTests = create((set, get: any) => ({
     // all tests data
@@ -28,7 +33,7 @@ const useTests = create((set, get: any) => ({
             question: "2 + 2 = ?",
             answers: ["1", "2", "3", "4"],
             answer: "4",
-            level: 1,
+            level: 2,
         },
         {
             id: "2",
@@ -56,6 +61,23 @@ const useTests = create((set, get: any) => ({
 
     // reset
     reset: () => set({ ids: [], tests: [] }),
+
+    // TODO: test this
+    answer: (answer: string): TestState => {
+        const activeTestIndex = get().activeTestIndex;
+        const activeTest = get().tests[activeTestIndex];
+        if (activeTest.answer === answer) {
+            get().setProgressByIndex(activeTestIndex, 1);
+        } else {
+            get().setProgressByIndex(activeTestIndex, 0);
+        }
+        if (activeTestIndex + 1 > get().tests.length) {
+            return TestState.Stop;
+        } else {
+            get().setActiveTestIndex(activeTestIndex + 1);
+        }
+        return TestState.Next;
+    },
 
     // api calls
     getTestsAPI: async (ids: string[], token: string) => {

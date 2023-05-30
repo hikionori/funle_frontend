@@ -23,15 +23,21 @@ const styles = StyleSheet.create({
     footer: {
         bottom: 20,
         position: "absolute",
-        alignSelf: "center",
-        width: '50%',
+        width: '90%',
         height: 50,
         backgroundColor: '#E67B02',
         borderRadius: 20,
+    
+        
+        alignSelf: 'center',
+        justifyContent: "space-between",
+        flexDirection: "row",
+
     },
     btn: {
         flex: 1,
         alignItems: 'center',
+        textAlign: 'center',
         justifyContent: 'center',
         color: "black",
         width: '100%',
