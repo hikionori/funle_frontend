@@ -31,7 +31,27 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         paddingLeft: 20
-    }
+    },
+    header: {
+        flex: 0,
+        alignSelf: "center",
+        padding: 10,
+
+        marginTop: 20,
+        marginBottom: 20,
+
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        borderRadius: 10,
+        
+    },
+    headerText: {
+        fontSize: 34,
+        fontWeight: "bold",
+        textAlign: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        color: '#E67B02',
+    },
 });
 
 export default styles;

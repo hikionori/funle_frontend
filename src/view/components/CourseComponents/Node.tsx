@@ -2,49 +2,50 @@ import React, { useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 
 interface NodeProps {
-    title: string;
-    mini_image: string; // url
-    type_: string; // "info" | "test"
-    n_of_tests?: number; // only if type_ === "test"
-    onNodePress?: Function;
+  id: string;
+  ids: string[]; // only if type_ === "test"
+  title: string;
+  mini_image: string; // url
+  type_: string; // "info" | "test"
+  n_of_tests?: number; // only if type_ === "test"
+  onNodePress: Function;
 }
 
 export default function Node(props: NodeProps) {
+  const type_ = props.type_;
 
-    const type_ = props.type_;
+  const [route, setRoute] = React.useState<string>("");
 
-    const [route, setRoute] = React.useState<string>("");
-
-    useEffect(() => {
+  useEffect(() => {
     if (type_ === "test") {
-        setRoute("Tests");
+      setRoute("Tests");
+    } else if (type_ === "info") {
+      setRoute("Info");
     }
-    else if (type_ === "info") {
-        setRoute("Info");
-    }}, [type_]);
+  }, [type_]);
 
-    const onClick = () => {
-        console.log(route);
-    }
+  const onClick = () => {
+    console.log(route);
+  };
 
-    const onClickNode = props.onNodePress;
+  const onClickNode = props.onNodePress;
 
-    return (
-        <TouchableOpacity
-            onPress={() => {
-                onClickNode && onClickNode(route);
-            }}
-        >
-            <View>
-                <Image
-                    source={{ uri: props.mini_image }}
-                    style={{
-                        width: 130,
-                        height: 130,
-                        display: "flex",
-                    }}
-                />
-            </View>
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        onClickNode && onClickNode(route);
+      }}
+    >
+      <View>
+        <Image
+          source={{ uri: props.mini_image }}
+          style={{
+            width: 130,
+            height: 130,
+            display: "flex",
+          }}
+        />
+      </View>
+    </TouchableOpacity>
+  );
 }

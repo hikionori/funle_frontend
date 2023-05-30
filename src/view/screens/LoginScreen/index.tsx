@@ -16,7 +16,6 @@ import { StatusBar } from "expo-status-bar";
 
 import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
-import { useFonts } from "expo-font";
 
 const LoginScreen = ({ navigation }: any) => {
     // TODO: change font family to "Fixel"
@@ -30,13 +29,6 @@ const LoginScreen = ({ navigation }: any) => {
     const login: any = useAuthStore((state: any) => state.login);
 
     const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
-    // console.log("loggedIn", loggedIn); //! debug
-
-    const [fontLoaded] = useFonts({
-        "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
-        "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
-    });
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {
@@ -46,10 +38,6 @@ const LoginScreen = ({ navigation }: any) => {
             setKeyboardVisible(false);
         });
     }, []);
-
-    if (!fontLoaded) {
-        return null;
-    }
 
     return (
         <SafeAreaView>
@@ -75,15 +63,17 @@ const LoginScreen = ({ navigation }: any) => {
                             resizeMode: "contain",
                             bottom: 0,
                             //! debug
-                            // display image curner 
+                            // display image curner
                             // borderRadius: 20,
                             // borderColor: "black",
                             // borderWidth: 1,
                         }}
                     />
-                    <View style={{
-                        flexDirection: "row",
-                    }}>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                        }}
+                    >
                         <Text
                             style={{
                                 top: -50,
