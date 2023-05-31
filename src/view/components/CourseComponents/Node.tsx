@@ -33,7 +33,7 @@ export default function Node(props: NodeProps) {
   return (
     <TouchableOpacity
       onPress={() => {
-        onClickNode && onClickNode(route);
+        onClickNode && onClickNode(props.ids);
       }}
     >
       <View>

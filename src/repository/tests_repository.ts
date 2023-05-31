@@ -1,7 +1,7 @@
 import axios from "axios";
 import { baseUrl } from "./constants";
 
-const getTest = async (testId: string, token: string) => {
+const getTest = async (testId: string) => {
     /*
         response looks like this:
         {
@@ -46,7 +46,7 @@ const getTest = async (testId: string, token: string) => {
 
     */
     const response = await axios.get(
-        `${baseUrl}/user/${token}/get/test?id=${testId}`
+        `${baseUrl}/admin/get/test?id=${testId}`
     );
     // TESTIT
     return response.data[Object.keys(response.data)[0]];
