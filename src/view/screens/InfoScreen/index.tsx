@@ -21,49 +21,59 @@ const InfoScreen = ({ navigation }: any) => {
   const {setTitle, setContentLevels} = useInfo((state: any) => ({setTitle: state.setTitle, setContentLevels: state.setContentLevels}));
 
   //! debug only
-  const static_content_levels = [
-    [
-      0,
-      [
-        {
-          content_type: "text",
-          data: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-        },
-        {
-          content_type: "image",
-          data: "https://picsum.photos/200/300",
-        },
-      ],
-    ],
-    [
-      1,
-      [
-        {
-          content_type: "text",
-          data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
-        },
-        {
-          content_type: "image",
-          data: "https://picsum.photos/200/300",
-        },
-      ],
-    ],
-    [
-      2,
-      [
-        {
-          content_type: "text",
-          data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
-        },
-      ],
+  // const static_content_levels = [
+  //   [
+  //     0,
+  //     [
+  //       {
+  //         content_type: "text",
+  //         data: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+  //       },
+  //       {
+  //         content_type: "image",
+  //         data: "https://picsum.photos/200/300",
+  //       },
+  //     ],
+  //   ],
+  //   [
+  //     1,
+  //     [
+  //       {
+  //         content_type: "text",
+  //         data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
+  //       },
+  //       {
+  //         content_type: "image",
+  //         data: "https://picsum.photos/200/300",
+  //       },
+  //     ],
+  //   ],
+  //   [
+  //     2,
+  //     [
+  //       {
+  //         content_type: "text",
+  //         data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
+  //       },
+  //     ],
       
-    ],
-  ];
+  //   ],
+  // ];
 
-  useEffect(() => {
-    setTitle("Hello");
-    setContentLevels(static_content_levels);
-  }, []);
+  // useEffect(() => {
+  //   // setTitle("Hello");
+  //   // setContentLevels(static_content_levels);
+  // }, []);
+
+
+  const handleScroll = (event: any) => {
+    const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
+    const isEndReached = layoutMeasurement.height + contentOffset.y >= contentSize.height;
+    if (isEndReached) {
+      // TODO: add to user progress
+      console.log("End reached");
+    }
+  }
 
   // TODO: Add logic
   return (
@@ -81,6 +91,7 @@ const InfoScreen = ({ navigation }: any) => {
           paddingTop: 30,
           paddingBottom: 50,
         }}
+        onScroll={handleScroll}
       >
         <View style={styles.header}>
           <Text style={styles.headerText}>{title}</Text>
