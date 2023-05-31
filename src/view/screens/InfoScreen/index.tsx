@@ -17,54 +17,7 @@ import LevelTreeInfo from "../../components/InfosComponents/LevelTree";
 const InfoScreen = ({ navigation }: any) => {
   const title = useInfo((state: any) => state.title);
   const content_levels = useInfo((state: any) => state.content_levels);
-
-  const {setTitle, setContentLevels} = useInfo((state: any) => ({setTitle: state.setTitle, setContentLevels: state.setContentLevels}));
-
-  //! debug only
-  // const static_content_levels = [
-  //   [
-  //     0,
-  //     [
-  //       {
-  //         content_type: "text",
-  //         data: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  //       },
-  //       {
-  //         content_type: "image",
-  //         data: "https://picsum.photos/200/300",
-  //       },
-  //     ],
-  //   ],
-  //   [
-  //     1,
-  //     [
-  //       {
-  //         content_type: "text",
-  //         data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
-  //       },
-  //       {
-  //         content_type: "image",
-  //         data: "https://picsum.photos/200/300",
-  //       },
-  //     ],
-  //   ],
-  //   [
-  //     2,
-  //     [
-  //       {
-  //         content_type: "text",
-  //         data: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. \nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.`,
-  //       },
-  //     ],
-      
-  //   ],
-  // ];
-
-  // useEffect(() => {
-  //   // setTitle("Hello");
-  //   // setContentLevels(static_content_levels);
-  // }, []);
-
+  
 
   const handleScroll = (event: any) => {
     const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
