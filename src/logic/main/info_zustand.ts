@@ -30,8 +30,10 @@ const useInfo = create((set, get: any) => ({
   reset: () => set({ id: "", title: "", content_levels: [] }),
 
   // api calls
-  getInfo: async (id: string, token: string) => {
-    const info = await getInfo(id, token);
+  getInfo: async (ids: string[], token: string) => {
+    const info = await getInfo(ids[0], token);
+    // sort content_levels by level
+    info.content_levels.sort((a: any, b: any) => a[0] - b[0]);
     set({
       id: info._id.$oid,
       title: info.title,

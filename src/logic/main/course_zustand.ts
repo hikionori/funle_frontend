@@ -42,12 +42,12 @@ const useCourse = create((set, get: any) => ({
     // api calls
     getCourse: async (id: string, token: string) => {
         const course = await getCourse(id, token);
-        // TODO: sort levels
+        const levels = course.levels.sort((a: any, b: any) => a[0] - b[0]);
         set({
             id: course._id.$oid,
             title: course.title,
             description: course.description,
-            levels: course.levels,
+            levels: levels,
         });
     },
 

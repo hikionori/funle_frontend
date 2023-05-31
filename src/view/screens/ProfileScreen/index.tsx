@@ -6,30 +6,55 @@ import {
     Button
 } from "react-native";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 import useAuthStore from "../../../logic/auth";
+import { useNavigation } from "@react-navigation/native";
+import { IconButton } from "native-base";
+import useUserStore from "../../../logic/main/user_zuzstand";
 
 
 const ProfileScreen = () => {
-
-    const [fontLoaded] = useFonts({
-        "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
-        "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-        "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
-    });
-
     const { logout } = useAuthStore((state: any) => ({logout: state.logout}));
+    const navigation = useNavigation();
 
-    if (!fontLoaded) {
-        return null;
-    }
+    const user = useUserStore((state: any) => state.user);
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerShown: true,
+            headerTitle: "Profile",
+            headerRight: () => {
+                return(
+                    <IconButton
+                        icon={<MaterialCommunityIcons name="logout" size={24} color="white" />}
+                        onPress={() => logout()}
+                    />
+                )
+            },
+            // header style
+            headerStyle: {
+                backgroundColor: "#E67B02",
+                height: 100,
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+                
+            },
+            headerTitleStyle: {
+                color: "#fff",
+                fontSize: 20,
+                fontWeight: "bold",
+            },
+        });
+    }, [navigation]);
 
     return (
         <SafeAreaView>
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
             <ImageBackground
                     source={require("../../../../assets/images/bg.png")}
                     style={{
@@ -70,7 +95,7 @@ const ProfileScreen = () => {
                                 textAlign: "center",
                             }}
                         >
-                            Username
+                            {user.username}
                         </Text>
                         <Text
                             style={{
@@ -82,18 +107,9 @@ const ProfileScreen = () => {
                                 textAlign: "center",
                             }}
                         >
-                            mail@gmail.com
+                            {user.email}
                         </Text>
                     </View>
-                    <View style={{}}>
-                        {/* Button for logout */}
-                        <Button
-                            title="Logout"
-                            color="#FFC700"
-                            onPress={() => logout()}
-                        />
-                    </View>
-
                 </ImageBackground>
            
         </SafeAreaView>
