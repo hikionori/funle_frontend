@@ -11,11 +11,12 @@ import React, { useEffect, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import styles from "./style";
-import useTests from "../../../logic/main/tests_zustand";
+import useTests, { TestState } from "../../../logic/main/tests_zustand";
 import Option from "../../components/TestsComponents/option";
 import { TextArea, TextField } from "native-base";
+import useUserStore from "../../../logic/main/user_zuzstand";
+import useAuthStore from "../../../logic/auth";
 
-// TODO: Add argument 'id'
 const TestsScreen = ({ navigation }: any) => {
 	// after clicking on the cell, we get the ids from the cell and pass it to useTests hook,
 	// next in useTests hook we get all tests by ids, after we pop first test and pass it to the useActiveTest hook,
@@ -23,18 +24,24 @@ const TestsScreen = ({ navigation }: any) => {
 
 	const questions = useTests((state: any) => state.tests);
 	const activeTestIndex = useTests((state: any) => state.activeTestIndex);
-	const activeTest = questions[activeTestIndex] ?? null;
+	const activeTest = questions[activeTestIndex];
 	const progress = useTests((state: any) => state.progress);
+
+	const user = useUserStore((state: any) => state.user);
+	const user_id: string = user._id.$oid;
+
+	const token = useAuthStore((state: any) => state.token);
 
 	// setters
 	const setProgress = useTests((state: any) => state.setProgress);
-	const {answerHandler} = useTests((state: any) => ({answerHandler: state.answer}));
+	const { answerHandler } = useTests((state: any) => ({
+		answerHandler: state.answer,
+	}));
 
 	const [answer, setAnswer] = useState(""); // value of the answer
 	const [actions, setActions] = useState<string[]>([]); // array of actions [action1, action2, ...] if activeTest.level === 2
 
 	const [keyboardVisible, setKeyboardVisible] = useState(false);
-
 
 	useEffect(() => {
 		Keyboard.addListener("keyboardDidShow", () => {
@@ -47,8 +54,8 @@ const TestsScreen = ({ navigation }: any) => {
 
 	//! debug
 	// useEffect(() => {
-	//     console.log("answer " + answer)
-	// }, [answer])
+	// 	console.log("user_id", user_id);
+	// }, []);
 
 	// TODO: Add more logic
 	useEffect(() => {
@@ -78,8 +85,9 @@ const TestsScreen = ({ navigation }: any) => {
 		});
 		//*
 
+		//! debug
 		// fill progress array with two 0, 3 1 and 2 undefined
-		setProgress([0, 0, 1, 1, 1, undefined, undefined]);
+		// setProgress([]);
 	}, []);
 
 	return (
@@ -136,7 +144,9 @@ const TestsScreen = ({ navigation }: any) => {
 						</View>
 						<View>
 							{/* //* Question text **/}
-							<Text style={styles.question}>2 × 2 = ?</Text>
+							<Text style={styles.question}>
+								{activeTest && activeTest.question}
+							</Text>
 
 							<Text
 								style={{
@@ -147,7 +157,7 @@ const TestsScreen = ({ navigation }: any) => {
 								Choose the right option:
 							</Text>
 							{/* //* Options **/}
-							{activeTest.level === 1 ? (
+							{activeTest && activeTest.level === 1 ? (
 								<View style={styles.options}>
 									{activeTest.answers.map(
 										(item: any, index: number) => {
@@ -162,13 +172,13 @@ const TestsScreen = ({ navigation }: any) => {
 										}
 									)}
 								</View>
-							) : activeTest.level === 2 ? (
+							) : activeTest && activeTest.level === 2 ? (
 								<View style={styles.options}>
 									{actions.length !== 0 ? (
 										actions.map(
 											(item: any, index: number) => {
 												return (
-													//!@ts-ignore
+													// @ts-ignore
 													<TextField
 														key={index}
 														placeholder="Enter action"
@@ -237,7 +247,17 @@ const TestsScreen = ({ navigation }: any) => {
 							backgroundColor: "#00BFA6",
 						}}
 						onPress={() => {
-							// TODO add answer handler
+
+							let t_answer = activeTest && activeTest.level === 1 ? answer : actions[actions.length - 1];
+
+							let res: TestState = answerHandler(t_answer, user_id, token);
+							if (res === TestState.Next) {
+								navigation.navigate("Tests")
+							}
+							// if res is TestState.Stop, navigate to MainScreen
+							if (res === TestState.Stop) {
+								navigation.navigate("MainScreen");
+							}
 						}}
 					>
 						<Text
@@ -251,7 +271,9 @@ const TestsScreen = ({ navigation }: any) => {
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
-						style={styles.btn}
+						style={{ ...styles.btn,
+							display: activeTest && activeTest.level === 2 ? "flex" : "none",
+						}}
 						onPress={() => {
 							// add new action
 							let temp = [...actions] as string[];

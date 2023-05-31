@@ -9,10 +9,14 @@ import {
   AuthNavScreens,
   AppNavigation,
 } from "./src/view/navigation";
+
 import { NavigationContainer } from "@react-navigation/native";
-import useAuthStore from "./src/logic/auth";
 import { useFonts } from "expo-font";
 import { NativeBaseProvider } from "native-base";
+
+import useAuthStore from "./src/logic/auth";
+import useCourse from "./src/logic/main/course_zustand";
+import useUserStore from "./src/logic/main/user_zuzstand";
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -24,10 +28,25 @@ export default function App() {
   });
 
   const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
+
+  const token: string = useAuthStore((state: any) => state.token);
+  const getUserInfo = useUserStore((state: any) => state.getUserInfo);
+  const getCourse: (course_id: string, token: string) => any = useCourse(
+    (state: any) => state.getCourse
+  );
+
   //! debug
   // useEffect(() => {
   //   console.log("loggedIn", loggedIn);
   // }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      getUserInfo(token);
+      // console.log("token", token);
+      getCourse("647724281951420a1476048e", token);
+    }
+  });
 
   if (!fontLoaded) {
     return null;
