@@ -13,18 +13,24 @@ import useInfo from "../../../logic/main/info_zustand";
 import ContentNode from "../../components/InfosComponents/ContentNode";
 import NodeLevel from "../../components/InfosComponents/NodeLevel";
 import LevelTreeInfo from "../../components/InfosComponents/LevelTree";
+import useUserStore from "../../../logic/main/user_zuzstand";
+import useAuthStore from "../../../logic/auth";
 
 const InfoScreen = ({ navigation }: any) => {
+  const id = useInfo((state: any) => state.id);
   const title = useInfo((state: any) => state.title);
   const content_levels = useInfo((state: any) => state.content_levels);
+
+  const token = useAuthStore((state: any) => state.token);
+
+  const addInfoToProgress = useUserStore((state: any) => state.addInfoToProgress);
   
 
   const handleScroll = (event: any) => {
     const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
     const isEndReached = layoutMeasurement.height + contentOffset.y >= contentSize.height;
     if (isEndReached) {
-      // TODO: add to user progress
-      console.log("End reached");
+      addInfoToProgress(id, token);
     }
   }
 
