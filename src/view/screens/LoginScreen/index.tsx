@@ -18,8 +18,6 @@ import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
 
 const LoginScreen = ({ navigation }: any) => {
-    // TODO: change font family to "Fixel"
-    //* TODO: useCallback to interact with zustand
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 

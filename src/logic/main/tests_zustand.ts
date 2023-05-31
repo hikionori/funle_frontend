@@ -41,7 +41,6 @@ const useTests = create((set, get: any) => ({
 		set({ ids: [], tests: [], activeTestIndex: 0, progress: [] });
 	},
 
-	// TODO: test this
 	answer: (answer: string, user_id: string, token: string): TestState => {
 		const activeTestIndex = get().activeTestIndex;
 		const activeTest = get().tests[activeTestIndex];

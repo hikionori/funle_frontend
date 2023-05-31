@@ -75,7 +75,6 @@ const InfoScreen = ({ navigation }: any) => {
     }
   }
 
-  // TODO: Add logic
   return (
     <ImageBackground
       source={require("../../../../assets/images/bg.png")}

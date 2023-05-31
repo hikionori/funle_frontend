@@ -57,7 +57,6 @@ const TestsScreen = ({ navigation }: any) => {
 	// 	console.log("user_id", user_id);
 	// }, []);
 
-	// TODO: Add more logic
 	useEffect(() => {
 		//* no functional block
 		navigation.setOptions({

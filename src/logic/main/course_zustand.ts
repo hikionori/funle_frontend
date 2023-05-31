@@ -42,13 +42,6 @@ const useCourse = create((set, get: any) => ({
     // api calls
     getCourse: async (id: string, token: string) => {
         const course = await getCourse(id, token);
-        // TODO: sort levels by level number
-        /**
-         * levels: [[1, [{...}, {...}, ...]], [0, [{...}, {...}, ...]], ...]
-         * 
-         * after sort:
-         * levels: [[0, [{...}, {...}, ...]], [1, [{...}, {...}, ...]], ...]
-         */
         const levels = course.levels.sort((a: any, b: any) => a[0] - b[0]);
         set({
             id: course._id.$oid,

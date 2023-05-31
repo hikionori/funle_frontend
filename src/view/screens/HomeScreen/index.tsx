@@ -63,7 +63,6 @@ const HomeScreen = ({ navigation }: any) => {
 	// 	setLevels(levels);
 	// }, []);
 
-	// TODO: rewrite this
 	return (
 		<ImageBackground
 			source={require("../../../../assets/images/bg.png")}
@@ -76,11 +75,7 @@ const HomeScreen = ({ navigation }: any) => {
 			}}
 		>
 			<View style={styles.container}>
-				{/* <NodeLevel
-          index={nodes[0] as number}
-          nodes={nodes[1]}
-          onNodePress={onNodePress}
-        /> */}
+				
 				<NodeLevelTree
 					onNodeInfoPress={() => {
 						// TODO: add logic for info
