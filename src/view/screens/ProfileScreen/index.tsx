@@ -24,6 +24,20 @@ const ProfileScreen = () => {
 
     const user = useUserStore((state: any) => state.user);
 
+    const user_progress = user.progress;
+
+    // user progress in tests
+    const tests = user_progress.tests; // id array of tests
+    const tests_count = tests.length;
+
+    const [tests_titles, setTestsTitles] = React.useState([]); // [id, title]
+    
+    // user progress in infos
+    const infos = user_progress.infos; // id array of infos
+    const info_count = infos.length;
+
+    const [infos_titles, setInfosTitles] = React.useState([]); // [id, title]
+
     useEffect(() => {
         navigation.setOptions({
             headerShown: true,
@@ -51,6 +65,11 @@ const ProfileScreen = () => {
             },
         });
     }, [navigation]);
+
+    useEffect(() => {
+        // TODO: fetch infos titles
+        // TODO: fetch tests titles
+    }, [])
 
     return (
         <SafeAreaView>
@@ -110,6 +129,7 @@ const ProfileScreen = () => {
                             {user.email}
                         </Text>
                     </View>
+                    {/* TODO: display user progress */}
                 </ImageBackground>
            
         </SafeAreaView>
