@@ -97,7 +97,7 @@ const LoginScreen = ({ navigation }: any) => {
                     </View>
                     {/* email field */}
                     <TextInput
-                        placeholder="Email"
+                        placeholder="Електронна пошта"
                         style={styles.textField}
                         onChangeText={(e) => {
                             setEmail(e);
@@ -107,7 +107,7 @@ const LoginScreen = ({ navigation }: any) => {
                     {/* password field */}
                     <TextInput
                         // placeholderTextColor={"blac"}
-                        placeholder="Password"
+                        placeholder="Пароль"
                         style={styles.textField}
                         onChangeText={(e) => {
                             setPassword(e);
@@ -132,7 +132,7 @@ const LoginScreen = ({ navigation }: any) => {
                                 fontFamily: "MacPawFixelDisplay-Bold",
                             }}
                         >
-                            Login
+                            Увійти
                         </Text>
                     </Pressable>
                     {/* text link to register screen 
@@ -158,7 +158,7 @@ const LoginScreen = ({ navigation }: any) => {
                                     fontFamily: "MacPawFixelDisplay-Medium",
                                 }}
                             >
-                                Don't have an account?
+                                Ви тут вперше?
                             </Text>
                             <Text
                                 onPress={() => navigation.navigate("Register")}
@@ -169,7 +169,7 @@ const LoginScreen = ({ navigation }: any) => {
                                     fontFamily: "MacPawFixelDisplay-Bold",
                                 }}
                             >
-                                Sign up
+                                Зареєструйтесь
                             </Text>
                         </View>
                     )}

@@ -22,12 +22,6 @@ const RegisterScreen = ({ navigation }: any) => {
     const [keyboardVisible, setKeyboardVisible] = React.useState(false);
     const register: any = useAuthStore((state: any) => state.register);
 
-    // const [fontLoaded] = useFonts({
-    //     "MacPawFixelDisplay-Black": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
-    //     "MacPawFixelDisplay-Bold": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
-    //     "MacPawFixelDisplay-Medium": require("../../../../assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
-    // });
-
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {
             setKeyboardVisible(true);
@@ -38,10 +32,6 @@ const RegisterScreen = ({ navigation }: any) => {
 
         // loadFontAsync();
     }, []);
-
-    // if (!fontLoaded) {
-    //     return null;
-    // }
 
     return (
         <View>
@@ -100,7 +90,7 @@ const RegisterScreen = ({ navigation }: any) => {
                 </View>
                 {/* username field */}
                 <TextInput
-                    placeholder="Username"
+                    placeholder="Ім'я користувача"
                     style={styles.textField}
                     onChangeText={(e) => {
                         setUsername(e);
@@ -109,7 +99,7 @@ const RegisterScreen = ({ navigation }: any) => {
                 />
                 {/* email field */}
                 <TextInput
-                    placeholder="Email"
+                    placeholder="Електронна пошта"
                     style={styles.textField}
                     onChangeText={(e) => {
                         setEmail(e);
@@ -118,7 +108,7 @@ const RegisterScreen = ({ navigation }: any) => {
                 />
                 {/* password field */}
                 <TextInput
-                    placeholder="Password"
+                    placeholder="Пароль"
                     style={styles.textField}
                     onChangeText={(e) => {
                         setPassword(e);
@@ -132,7 +122,7 @@ const RegisterScreen = ({ navigation }: any) => {
                         register(username, email, password);
                         navigation.navigate("Login");
                     }}
-                    style={styles.btn}
+                    style={{...styles.btn, width: 250}}
                 >
                     <Text
                         style={{
@@ -142,7 +132,7 @@ const RegisterScreen = ({ navigation }: any) => {
                             fontFamily: "MacPawFixelDisplay-Black",
                         }}
                     >
-                        Sign Up
+                        Зареєструватися
                     </Text>
                 </Pressable>
                 {/* link to login screen */}
@@ -166,7 +156,7 @@ const RegisterScreen = ({ navigation }: any) => {
                                 fontFamily: "MacPawFixelDisplay-Medium",
                             }}
                         >
-                            Already have an account?
+                            Вже є акаунт?
                         </Text>
                         <Text
                             onPress={() => navigation.navigate("Login")}
@@ -177,7 +167,7 @@ const RegisterScreen = ({ navigation }: any) => {
                                 fontFamily: "MacPawFixelDisplay-Bold",
                             }}
                         >
-                            Login
+                            Увійти
                         </Text>
                     </View>
                 )}

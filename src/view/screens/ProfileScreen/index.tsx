@@ -27,7 +27,7 @@ const ProfileScreen = () => {
     useEffect(() => {
         navigation.setOptions({
             headerShown: true,
-            headerTitle: "Profile",
+            headerTitle: "Профіль",
             headerRight: () => {
                 return(
                     <IconButton
