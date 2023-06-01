@@ -16,27 +16,30 @@ import useAuthStore from "../../../logic/auth";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "native-base";
 import useUserStore from "../../../logic/main/user_zuzstand";
+import { getInfo } from "../../../repository/info_repository";
+import { getTest } from "../../../repository/tests_repository";
 
 
 const ProfileScreen = () => {
     const { logout } = useAuthStore((state: any) => ({logout: state.logout}));
     const navigation = useNavigation();
 
+    const token = useAuthStore((state: any) => state.token);
     const user = useUserStore((state: any) => state.user);
 
     const user_progress = user.progress;
 
     // user progress in tests
-    const tests = user_progress.tests; // id array of tests
-    const tests_count = tests.length;
+    const tests: string[] = user_progress.tests; // id array of tests
+    const tests_count: number = tests.length;
 
-    const [tests_titles, setTestsTitles] = React.useState([]); // [id, title]
+    const [tests_titles, setTestsTitles] = React.useState<string[][]>([]); // [[id, title], ...]
     
     // user progress in infos
-    const infos = user_progress.infos; // id array of infos
-    const info_count = infos.length;
+    const infos: string[] = user_progress.infos; // id array of infos
+    const infos_count: number = infos.length;
 
-    const [infos_titles, setInfosTitles] = React.useState([]); // [id, title]
+    const [infos_titles, setInfosTitles] = React.useState<string[][]>([]); // [[id, title], ...]
 
     useEffect(() => {
         navigation.setOptions({
@@ -66,9 +69,23 @@ const ProfileScreen = () => {
         });
     }, [navigation]);
 
+    // TODO: test it
     useEffect(() => {
-        // TODO: fetch infos titles
-        // TODO: fetch tests titles
+        let temp: string[][] = [];
+        for (let i = 0; i < infos_count; i++) {
+            getInfo(infos[i], token).then((res) => {
+                temp.push([infos[i], res.title]);
+            });
+        }
+        setInfosTitles(temp);
+
+        temp = [];
+        for (let i = 0; i < tests_count; i++) {
+            getTest(tests[i]).then((res) => {
+                temp.push([tests[i], res.title]);
+            })
+        }
+        setTestsTitles(temp);
     }, [])
 
     return (
