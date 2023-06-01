@@ -180,7 +180,7 @@ const TestsScreen = ({ navigation }: any) => {
 													// @ts-ignore
 													<TextField
 														key={index}
-														placeholder="Enter action"
+														placeholder="Введіть дію"
 														value={item}
 														backgroundColor={"#fff"}
 														borderRadius={10}
@@ -266,7 +266,7 @@ const TestsScreen = ({ navigation }: any) => {
 								fontSize: 20,
 							}}
 						>
-							Answer
+							Відповісти
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -292,7 +292,7 @@ const TestsScreen = ({ navigation }: any) => {
 								size={25}
 								color="white"
 							/>
-							Add action
+							Дадати дію
 						</Text>
 					</TouchableOpacity>
 				</View>
