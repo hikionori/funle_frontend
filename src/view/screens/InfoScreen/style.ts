@@ -45,12 +45,18 @@ const styles = StyleSheet.create({
         
     },
     headerText: {
-        fontSize: 34,
-        fontWeight: "bold",
+        fontSize: 30,
+        fontWeight: "800",
         textAlign: "center",
         alignContent: "center",
         justifyContent: "center",
         color: '#E67B02',
+
+        fontFamily: "MacPawFixel-VF",
+        fontStyle: "normal",
+        lineHeight: 41,
+        textTransform: "uppercase",
+        fontFeatureSetting: "'ordn' on, 'hist' on, 'rvrn' on, 'salt' on, 'ss01' on"
     },
 });
 

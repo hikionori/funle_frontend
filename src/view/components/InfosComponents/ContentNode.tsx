@@ -15,7 +15,17 @@ export default function ContentNode(props: ContentNodeProps) {
         return (
             <Text
                 style={{
-                    flex: 1
+                    flex: 1,
+                    fontSize: 18,
+                    fontFamily: "MacPawFixel-VF",
+                    fontWeight: "800",
+                    fontStyle: "normal",
+                    lineHeight: 28,
+                    fontVariant: ["small-caps"],
+                    //@ts-ignore
+                    fontFeatureSettings: "'ss01' on, 'salt' on, 'ordn' on",
+                    color: "#3C3C3C",
+                    
                 }}
             >{props.data}</Text>
         );
