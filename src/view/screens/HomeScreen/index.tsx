@@ -15,6 +15,7 @@ import useTests from "../../../logic/main/tests_zustand";
 import { StatusBar } from "expo-status-bar";
 import useInfo from "../../../logic/main/info_zustand";
 import useAuthStore from "../../../logic/auth";
+import { ScrollView } from "native-base";
 
 const HomeScreen = ({ navigation }: any) => {
 	// const setLevels = useCourse((state: any) => state.setLevels);
@@ -37,7 +38,12 @@ const HomeScreen = ({ navigation }: any) => {
 					justifyContent: "center",
 				}}
 			>
-				<View style={styles.container}>
+				<ScrollView
+					contentContainerStyle={{
+						paddingTop: 100,
+						paddingBottom: 70,
+					}}
+				>
 					<NodeLevelTree
 						onNodeInfoPress={(ids: string[]) => {
 							getInfo(ids, token);
@@ -53,7 +59,7 @@ const HomeScreen = ({ navigation }: any) => {
 							});
 						}}
 					/>
-				</View>
+				</ScrollView>
 			</ImageBackground>
 		</SafeAreaView>
 	);

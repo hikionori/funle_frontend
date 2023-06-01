@@ -48,6 +48,7 @@ const InfoScreen = ({ navigation }: any) => {
         contentContainerStyle={{
           paddingTop: 30,
           paddingBottom: 50,
+          
         }}
         onScroll={handleScroll}
       >

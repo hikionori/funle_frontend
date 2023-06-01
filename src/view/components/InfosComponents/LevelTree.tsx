@@ -10,7 +10,11 @@ interface Props {
 
 export default function LevelTreeInfo({ content_levels }: Props) {
   return (
-    <View>
+    <View
+      style={{
+        paddingLeft: 15
+      }}
+    >
       {content_levels &&
         content_levels.map((level: any, index: number) => {
           return <NodeLevel key={index} index={index} nodes={level[1]} />;
