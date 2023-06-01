@@ -153,7 +153,7 @@ const TestsScreen = ({ navigation }: any) => {
 									fontSize: 32,
 								}}
 							>
-								Choose the right option:
+								Оберіть правильну відповідь:
 							</Text>
 							{/* //* Options **/}
 							{activeTest && activeTest.level === 1 ? (
