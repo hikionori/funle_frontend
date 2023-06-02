@@ -1,35 +1,30 @@
-'use strict';
+"use strict";
 
 import {
 	Image,
-	ImageBackground, Pressable,
+	ImageBackground,
+	Pressable,
 	SafeAreaView,
 	ScrollView,
 	Text,
-	View
+	View,
 } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { IconButton, Spacer } from "native-base";
+import { useNavigation } from "@react-navigation/native";
+import { Spacer } from "native-base";
 import useAuthStore from "../../../logic/auth";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import { getInfo } from "../../../repository/info_repository";
 import { getTest } from "../../../repository/tests_repository";
-import { get_user_info } from "../../../repository/user_repository";
-import { useStore } from "zustand";
 
 const ProfileScreen = () => {
-	const { logout } = useAuthStore((state: any) => ({ logout: state.logout }));
 	const navigation = useNavigation();
 
 	const token = useAuthStore((state: any) => state.token);
-	const getUser = useUserStore((state: any) => state.getUser);
-	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
-	const setUser = useUserStore((state: any) => state.setUser);
 
 	const user = useUserStore((state: any) => state.user);
 
@@ -60,7 +55,6 @@ const ProfileScreen = () => {
 		setTestsVisibility(!testsVisibility);
 	};
 
-
 	useEffect(() => {
 		let info_temp: string[][] = [];
 		for (let i = 0; i < infos_count; i++) {
@@ -70,7 +64,6 @@ const ProfileScreen = () => {
 				// setInfosTitles([...infos_titles, [infos[i].slice(0, 6), res!.title]]);
 			});
 		}
-
 
 		// remove duplicates by title, info[1]
 		info_temp = info_temp.filter(
@@ -297,7 +290,7 @@ const ProfileScreen = () => {
 							alignItems: "center",
 							marginTop: 20,
 						}}
-						onPress={async() => await handleTestsVisibility()}
+						onPress={async () => await handleTestsVisibility()}
 					>
 						<Text
 							style={{
