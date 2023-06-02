@@ -105,6 +105,8 @@ const TestsScreen = ({ navigation }: any) => {
 					contentContainerStyle={{
 						paddingBottom: 60,
 					}}
+					showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
 				>
 					<View style={styles.container}>
 						<View style={styles.boxGroup}>

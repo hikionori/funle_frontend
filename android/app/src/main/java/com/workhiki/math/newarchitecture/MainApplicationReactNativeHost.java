@@ -1,4 +1,4 @@
-package com.funle.newarchitecture;
+package com.workhiki.math.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.funle.BuildConfig;
-import com.funle.newarchitecture.components.MainComponentsRegistry;
-import com.funle.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.workhiki.math.BuildConfig;
+import com.workhiki.math.newarchitecture.components.MainComponentsRegistry;
+import com.workhiki.math.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

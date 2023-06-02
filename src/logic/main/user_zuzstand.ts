@@ -13,7 +13,10 @@ const useUserStore = create((set, get: any) => ({
         if (response) {
             set({ user: response });
         }
-        // console.log(get().user);
+    },
+
+    setUser: (user: User) => {
+        set({ user: user });
     },
 
     // join course

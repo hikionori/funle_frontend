@@ -1,4 +1,4 @@
-package com.funle.newarchitecture.modules;
+package com.workhiki.math.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
