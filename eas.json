@@ -17,8 +17,7 @@
       "distribution": "store",
       "android": {
         "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease",
-        "icon": "assets/images/icon.png"
+        "gradleCommand": ":app:assembleRelease"
       }
     }
   },

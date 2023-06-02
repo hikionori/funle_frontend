@@ -6,7 +6,7 @@ import {
     UserRole,
 } from "../../repository/user_repository";
 
-const useAuthStore = create((set) => ({
+const useAuthStore = create((set, get: any) => ({
     loggedIn: false,
     token: "".toString(),
 
@@ -19,6 +19,7 @@ const useAuthStore = create((set) => ({
         if (response?.data.refresh_token) {
             set({ loggedIn: true, token: response.data.refresh_token });
         }
+        localStorage.setItem("token", get().token)
     },
     register: async (name: string, email: string, password: string) => {
         var response = await register(name, email, password, UserRole.USER);

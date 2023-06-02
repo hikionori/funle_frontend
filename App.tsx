@@ -30,6 +30,8 @@ export default function App() {
   const loggedIn: boolean = useAuthStore((state: any) => state.loggedIn);
 
   const token: string = useAuthStore((state: any) => state.token);
+  const auth = useAuthStore((state: any) => state.auth);
+
   const getUserInfo = useUserStore((state: any) => state.getUserInfo);
   const getCourse: (course_id: string, token: string) => any = useCourse(
     (state: any) => state.getCourse
@@ -41,12 +43,18 @@ export default function App() {
   // }, [loggedIn]);
 
   useEffect(() => {
+    
+    let l_token = localStorage.getItem("token");
+    if (l_token) {
+      auth(l_token);
+    }
+
     if (loggedIn) {
       getUserInfo(token);
       // console.log("token", token);
       getCourse("647724281951420a1476048e", token);
-    }
-  });
+    } 
+  }, []);
 
   if (!fontLoaded) {
     return null;
