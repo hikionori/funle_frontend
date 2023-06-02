@@ -1,13 +1,8 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 
-import { StyleSheet, Text, View } from "react-native";
 import {
-  HomeNavigation,
-  HomeNavScreens,
-  AuthNavigation,
   AuthNavScreens,
-  AppNavigation,
+  AppNavigation
 } from "./src/view/navigation";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -17,6 +12,8 @@ import { NativeBaseProvider } from "native-base";
 import useAuthStore from "./src/logic/auth";
 import useCourse from "./src/logic/main/course_zustand";
 import useUserStore from "./src/logic/main/user_zuzstand";
+
+import { AsyncStorage } from "react-native";
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -37,23 +34,17 @@ export default function App() {
     (state: any) => state.getCourse
   );
 
-  //! debug
-  // useEffect(() => {
-  //   console.log("loggedIn", loggedIn);
-  // }, [loggedIn]);
-
   useEffect(() => {
-    
-    let l_token = localStorage.getItem("token");
-    if (l_token) {
-      auth(l_token);
-    }
-
-    if (loggedIn) {
-      getUserInfo(token);
-      // console.log("token", token);
-      getCourse("647724281951420a1476048e", token);
-    } 
+    AsyncStorage.getItem("token").then((value) => {
+      if (value) {
+        auth(value);
+      }
+      if (loggedIn) {
+        getUserInfo(token);
+        // console.log("token", token);
+        getCourse("647724281951420a1476048e", token);
+      }
+    });
   });
 
   if (!fontLoaded) {

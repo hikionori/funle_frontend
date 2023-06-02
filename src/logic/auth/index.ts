@@ -5,6 +5,7 @@ import {
     register,
     UserRole,
 } from "../../repository/user_repository";
+import { AsyncStorage } from "react-native";
 
 const useAuthStore = create((set, get: any) => ({
     loggedIn: false,
@@ -17,9 +18,9 @@ const useAuthStore = create((set, get: any) => ({
         var response = await login(email, password);
         // if have response with refresh_token save it in local storage
         if (response?.data.refresh_token) {
+            AsyncStorage.setItem("token", response.data.refresh_token)
             set({ loggedIn: true, token: response.data.refresh_token });
         }
-        localStorage.setItem("token", get().token)
     },
     register: async (name: string, email: string, password: string) => {
         var response = await register(name, email, password, UserRole.USER);
