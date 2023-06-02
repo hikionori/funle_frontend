@@ -2,7 +2,7 @@ import axios, { formToJSON } from "axios";
 import { baseUrl } from "./constants";
 
 export interface User {
-	id: { $oid: string};
+	id: { $oid: string };
 	name: string;
 	email: string;
 	hashed_password: string;
@@ -129,15 +129,13 @@ const add_test_to_user = async (
 	p_user_id: string,
 	token: string
 ) => {
-
 	let data = {
-		"test_id": p_test_id,
-		"user_id": p_user_id,
-	}
+		test_id: p_test_id,
+		user_id: p_user_id,
+	};
 
 	var response = await axios
-		.put(baseUrl + `/user/${token}/pass/test`, data
-		)
+		.put(baseUrl + `/user/${token}/pass/test`, data)
 		.catch((error) => {
 			console.log(error);
 		});

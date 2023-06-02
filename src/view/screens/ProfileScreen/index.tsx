@@ -1,3 +1,5 @@
+'use strict';
+
 import {
 	Image,
 	ImageBackground, Pressable,
@@ -11,13 +13,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { IconButton, Spacer } from "native-base";
 import useAuthStore from "../../../logic/auth";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import { getInfo } from "../../../repository/info_repository";
 import { getTest } from "../../../repository/tests_repository";
 import { get_user_info } from "../../../repository/user_repository";
+import { useStore } from "zustand";
 
 const ProfileScreen = () => {
 	const { logout } = useAuthStore((state: any) => ({ logout: state.logout }));
@@ -28,15 +31,16 @@ const ProfileScreen = () => {
 	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
 	const setUser = useUserStore((state: any) => state.setUser);
 
-	const user = getUser();
+	const user = useUserStore((state: any) => state.user);
+
 	// user progress in tests
-	const tests: string[] = user.progress!.tests; // id array of tests
+	const tests: string[] = user.progress.tests; // id array of tests
 	const tests_count: number = tests.length;
 
 	const [tests_titles, setTestsTitles] = React.useState<string[][]>([]); // [[id, title], ...]
 
 	// user progress in infos
-	const infos: string[] = user.progress!.infos; // id array of infos
+	const infos: string[] = user.progress.infos; // id array of infos
 	const infos_count: number = infos.length;
 
 	const [infos_titles, setInfosTitles] = React.useState<string[][]>([]); // [[id, title], ...]
@@ -48,60 +52,16 @@ const ProfileScreen = () => {
 
 	const [refresh, setRefresh] = React.useState<boolean>(false);
 
-	const handleInfosVisibility = () => {
+	const handleInfosVisibility = async () => {
 		setInfosVisibility(!infosVisibility);
 	};
 
-	const handleTestsVisibility = () => {
+	const handleTestsVisibility = async () => {
 		setTestsVisibility(!testsVisibility);
 	};
-	useEffect(() => {
-		navigation.setOptions({
-			headerShown: true,
-			headerTitle: "Профіль",
-			headerRight: () => {
-				return (
-					<View
-						style={{
-							flexDirection: "row",
-						}}
-					>
-						<IconButton
-							icon={
-								<MaterialCommunityIcons
-									name="logout"
-									size={24}
-									color="white"
-								/>
-							}
-							onPress={() => logout()}
-						/>
-					</View>
-				);
-			},
-			// header style
-			headerStyle: {
-				backgroundColor: "#E67B02",
-				height: 100,
-				borderBottomLeftRadius: 20,
-				borderBottomRightRadius: 20,
-			},
-			headerTitleStyle: {
-				color: "#fff",
-				fontSize: 20,
-				fontWeight: "bold",
-			},
-		});
 
-		setRefresh(!refresh);
-	}, [navigation]);
 
 	useEffect(() => {
-
-		get_user_info(token).then((res) => {
-			setUser(res);
-		});
-
 		let info_temp: string[][] = [];
 		for (let i = 0; i < infos_count; i++) {
 			getInfo(infos[i], token).then((res) => {
@@ -134,7 +94,7 @@ const ProfileScreen = () => {
 				index === self.findIndex((t) => t[1] === item[1])
 		);
 		setTestsTitles(test_temp);
-	}, [refresh]);
+	}, [navigation]);
 
 	// TODO: test it
 
@@ -240,7 +200,7 @@ const ProfileScreen = () => {
 							justifyContent: "space-between",
 							alignItems: "center",
 						}}
-						onPress={() => handleInfosVisibility()}
+						onPress={async () => await handleInfosVisibility()}
 					>
 						<Text
 							style={{
@@ -337,7 +297,7 @@ const ProfileScreen = () => {
 							alignItems: "center",
 							marginTop: 20,
 						}}
-						onPress={() => handleTestsVisibility()}
+						onPress={async() => await handleTestsVisibility()}
 					>
 						<Text
 							style={{

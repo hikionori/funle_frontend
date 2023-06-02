@@ -8,12 +8,11 @@ const useUserStore = create((set, get: any) => ({
         return get().user as User;
     },
 
-    getUserInfo: async (token: string): Promise<User> => {
+    getUserInfo: async (token: string) => {
         var response = await get_user_info(token);
         if (response) {
             set({ user: response });
         }
-        return response;
     },
 
     setUser: (user: User) => {
