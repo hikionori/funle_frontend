@@ -1,44 +1,40 @@
 import {
-	Text,
-	View,
-	SafeAreaView,
 	Image,
-	ImageBackground,
-	Button,
-	Pressable,
+	ImageBackground, Pressable,
+	SafeAreaView,
 	ScrollView,
+	Text,
+	View
 } from "react-native";
 
-import React, { useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
-import { useFonts } from "expo-font";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect } from "react";
 
-import useAuthStore from "../../../logic/auth";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton, Spacer } from "native-base";
+import useAuthStore from "../../../logic/auth";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import { getInfo } from "../../../repository/info_repository";
 import { getTest } from "../../../repository/tests_repository";
-import { background } from "native-base/lib/typescript/theme/styled-system";
 
 const ProfileScreen = () => {
 	const { logout } = useAuthStore((state: any) => ({ logout: state.logout }));
 	const navigation = useNavigation();
 
 	const token = useAuthStore((state: any) => state.token);
-	const user = useUserStore((state: any) => state.user);
+	const getUser = useUserStore((state: any) => state.getUser);
+	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
 
-	const user_progress = user.progress;
-
+	const user = getUser();
 	// user progress in tests
-	const tests: string[] = user_progress!.tests; // id array of tests
+	const tests: string[] = user.progress!.tests; // id array of tests
 	const tests_count: number = tests.length;
 
 	const [tests_titles, setTestsTitles] = React.useState<string[][]>([]); // [[id, title], ...]
 
 	// user progress in infos
-	const infos: string[] = user_progress!.infos; // id array of infos
+	const infos: string[] = user.progress!.infos; // id array of infos
 	const infos_count: number = infos.length;
 
 	const [infos_titles, setInfosTitles] = React.useState<string[][]>([]); // [[id, title], ...]
@@ -48,7 +44,6 @@ const ProfileScreen = () => {
 	const [testsVisibility, setTestsVisibility] =
 		React.useState<boolean>(false);
 
-	// TODO: on press handlers
 	const handleInfosVisibility = () => {
 		setInfosVisibility(!infosVisibility);
 	};
@@ -56,51 +51,28 @@ const ProfileScreen = () => {
 	const handleTestsVisibility = () => {
 		setTestsVisibility(!testsVisibility);
 	};
-
-	useEffect(() => {
-		let info_temp: string[][] = [];
-		for (let i = 0; i < infos_count; i++) {
-			getInfo(infos[i], token).then((res) => {
-				// console.log(res);
-				info_temp.push([infos[i].slice(0, 6), res!.title]);
-			});
-		}
-		setInfosTitles(info_temp);
-
-		let test_temp: string[][] = [];
-		for (let i = 0; i < tests_count; i++) {
-			getTest(tests[i]).then((res) => {
-				// console.log(res);
-				test_temp.push([tests[i].slice(0, 6), res.question]);
-			});
-		}
-		setTestsTitles(test_temp);
-
-		// delete temp variables
-		// test_temp = [];
-		// info_temp = [];
-
-		//! debug
-		// console.log(tests_titles);
-		// console.log(infos_titles);
-	}, []);
-
 	useEffect(() => {
 		navigation.setOptions({
 			headerShown: true,
 			headerTitle: "Профіль",
 			headerRight: () => {
 				return (
-					<IconButton
-						icon={
-							<MaterialCommunityIcons
-								name="logout"
-								size={24}
-								color="white"
-							/>
-						}
-						onPress={() => logout()}
-					/>
+					<View
+						style={{
+							flexDirection: "row",
+						}}
+					>
+						<IconButton
+							icon={
+								<MaterialCommunityIcons
+									name="logout"
+									size={24}
+									color="white"
+								/>
+							}
+							onPress={() => logout()}
+						/>
+					</View>
 				);
 			},
 			// header style
@@ -116,6 +88,38 @@ const ProfileScreen = () => {
 				fontWeight: "bold",
 			},
 		});
+
+		let info_temp: string[][] = [];
+		for (let i = 0; i < infos_count; i++) {
+			getInfo(infos[i], token).then((res) => {
+				// console.log(res);
+				info_temp.push([infos[i].slice(0, 6), res!.title]);
+				// setInfosTitles([...infos_titles, [infos[i].slice(0, 6), res!.title]]);
+			});
+		}
+
+		// remove duplicates by title, info[1]
+		info_temp = info_temp.filter(
+			(item, index, self) =>
+				index === self.findIndex((t) => t[1] === item[1])
+		);
+		setInfosTitles(info_temp);
+
+		let test_temp: string[][] = [];
+		for (let i = 0; i < tests_count; i++) {
+			getTest(tests[i]).then((res) => {
+				// console.log(res);
+				test_temp.push([tests[i].slice(0, 6), res.question]);
+				// setTestsTitles([...tests_titles, [tests[i].slice(0, 6), res.question]]);
+			});
+		}
+
+		// remove duplicates by title, test[1]
+		test_temp = test_temp.filter(
+			(item, index, self) =>
+				index === self.findIndex((t) => t[1] === item[1])
+		);
+		setTestsTitles(test_temp);
 	}, [navigation]);
 
 	// TODO: test it
@@ -180,32 +184,32 @@ const ProfileScreen = () => {
 					</Text>
 				</View>
 				<Text
-                    style={{
-                        top: -140,
-                        fontFamily: "MacPawFixelDisplay-Black",
-                        fontSize: 20,
-                        alignSelf: "flex-start",
-                        paddingLeft: 60,
-                    }}
-                >
-                    Ваш прогрес:
-                </Text>
+					style={{
+						top: -140,
+						fontFamily: "MacPawFixelDisplay-Black",
+						fontSize: 20,
+						alignSelf: "flex-start",
+						paddingLeft: 60,
+					}}
+				>
+					Ваш прогрес:
+				</Text>
 				<ScrollView
 					style={{
 						position: "absolute",
-						top: 400,
+						top: "50%",
 						height: 500,
-                        // borderRadius: 20,
+						// borderRadius: 20,
 					}}
 					contentContainerStyle={{
 						flexDirection: "column",
 						alignItems: "center",
 						justifyContent: "center",
-						paddingBottom: 180,
-                        borderRadius: 20,
+						paddingBottom: "80%",
+						borderRadius: 20,
 					}}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
+					showsVerticalScrollIndicator={false}
+					showsHorizontalScrollIndicator={false}
 				>
 					<Pressable
 						style={{
@@ -250,26 +254,22 @@ const ProfileScreen = () => {
 						style={{
 							width: 300,
 							// height: "fit-content",
-							height: 200,
+							height: "auto",
 							backgroundColor: "rgba(230, 123, 2, 0.2)",
 							borderBottomLeftRadius: 20,
 							borderBottomRightRadius: 20,
 							display: infosVisibility ? "flex" : "none",
 						}}
 					>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                            }}
-                        >
-                            <Text>
-                                ID
-                            </Text>
-                            <Text>
-                                Назва
-                            </Text>
-                        </View>
+						<View
+							style={{
+								flexDirection: "row",
+								justifyContent: "space-around",
+							}}
+						>
+							<Text>ID</Text>
+							<Text>Назва</Text>
+						</View>
 						{infos_titles.map((info: string[], index: number) => {
 							return (
 								<View
@@ -288,17 +288,17 @@ const ProfileScreen = () => {
 										style={{
 											fontFamily:
 												"MacPawFixelDisplay-Medium",
-                                            left: 40
+											left: 40,
 										}}
 									>
 										{info[0]}
 									</Text>
-                                    <Spacer />
+									<Spacer />
 									<Text
 										style={{
 											fontFamily:
 												"MacPawFixelDisplay-Medium",
-                                            right: 40
+											right: 40,
 										}}
 									>
 										{info[1]}
@@ -351,28 +351,24 @@ const ProfileScreen = () => {
 						style={{
 							width: 300,
 							// height: "fit-content",
-							height: 200,
+							height: "auto",
 							backgroundColor: "rgba(230, 123, 2, 0.2)",
 							borderBottomLeftRadius: 20,
 							borderBottomRightRadius: 20,
 							display: testsVisibility ? "flex" : "none",
 						}}
 					>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                            }}
-                        >
-                            <Text>
-                                ID
-                            </Text>
-                            <Text>
-                                Текст завдання
-                            </Text>
-                        </View>
-                        {tests_titles.map((test: string[], index: number) => {
-                            return (
+						<View
+							style={{
+								flexDirection: "row",
+								justifyContent: "space-around",
+							}}
+						>
+							<Text>ID</Text>
+							<Text>Текст завдання</Text>
+						</View>
+						{tests_titles.map((test: string[], index: number) => {
+							return (
 								<View
 									key={index}
 									style={{
@@ -389,24 +385,24 @@ const ProfileScreen = () => {
 										style={{
 											fontFamily:
 												"MacPawFixelDisplay-Medium",
-                                            left: 30,
+											left: 30,
 										}}
 									>
 										{test[0]}
 									</Text>
-                                    <Spacer />
+									<Spacer />
 									<Text
 										style={{
 											fontFamily:
 												"MacPawFixelDisplay-Medium",
-                                            right: 40,
+											right: 40,
 										}}
 									>
 										{test[1]}
 									</Text>
 								</View>
 							);
-                        })}
+						})}
 					</View>
 				</ScrollView>
 			</ImageBackground>

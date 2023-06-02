@@ -2,7 +2,7 @@ import axios, { formToJSON } from "axios";
 import { baseUrl } from "./constants";
 
 export interface User {
-	id: String;
+	id: { $oid: string};
 	name: string;
 	email: string;
 	hashed_password: string;
