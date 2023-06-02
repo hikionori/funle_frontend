@@ -29,7 +29,7 @@ const InfoScreen = ({ navigation }: any) => {
   const handleScroll = (event: any) => {
     const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
     const isEndReached = layoutMeasurement.height + contentOffset.y >= contentSize.height;
-    if (isEndReached) {
+    if (isEndReached && contentOffset.y > 0) {
       addInfoToProgress(id, token);
     }
   }
@@ -51,6 +51,7 @@ const InfoScreen = ({ navigation }: any) => {
           
         }}
         onScroll={handleScroll}
+        
       >
         <View style={styles.header}>
           <Text style={styles.headerText}>{title}</Text>
@@ -61,6 +62,7 @@ const InfoScreen = ({ navigation }: any) => {
         <TouchableOpacity
           onPress={() => {
             // go back
+            addInfoToProgress(id, token);
             navigation.navigate("MainScreen");
           }}
         >

@@ -43,6 +43,8 @@ const HomeScreen = ({ navigation }: any) => {
 						paddingTop: 100,
 						paddingBottom: 70,
 					}}
+					showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
 				>
 					<NodeLevelTree
 						onNodeInfoPress={(ids: string[]) => {
