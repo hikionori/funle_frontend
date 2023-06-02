@@ -17,6 +17,7 @@ import useAuthStore from "../../../logic/auth";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import { getInfo } from "../../../repository/info_repository";
 import { getTest } from "../../../repository/tests_repository";
+import { get_user_info } from "../../../repository/user_repository";
 
 const ProfileScreen = () => {
 	const { logout } = useAuthStore((state: any) => ({ logout: state.logout }));
@@ -25,6 +26,7 @@ const ProfileScreen = () => {
 	const token = useAuthStore((state: any) => state.token);
 	const getUser = useUserStore((state: any) => state.getUser);
 	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
+	const setUser = useUserStore((state: any) => state.setUser);
 
 	const user = getUser();
 	// user progress in tests
@@ -43,6 +45,8 @@ const ProfileScreen = () => {
 		React.useState<boolean>(false);
 	const [testsVisibility, setTestsVisibility] =
 		React.useState<boolean>(false);
+
+	const [refresh, setRefresh] = React.useState<boolean>(false);
 
 	const handleInfosVisibility = () => {
 		setInfosVisibility(!infosVisibility);
@@ -89,6 +93,15 @@ const ProfileScreen = () => {
 			},
 		});
 
+		setRefresh(!refresh);
+	}, [navigation]);
+
+	useEffect(() => {
+
+		get_user_info(token).then((res) => {
+			setUser(res);
+		});
+
 		let info_temp: string[][] = [];
 		for (let i = 0; i < infos_count; i++) {
 			getInfo(infos[i], token).then((res) => {
@@ -97,6 +110,7 @@ const ProfileScreen = () => {
 				// setInfosTitles([...infos_titles, [infos[i].slice(0, 6), res!.title]]);
 			});
 		}
+
 
 		// remove duplicates by title, info[1]
 		info_temp = info_temp.filter(
@@ -120,7 +134,7 @@ const ProfileScreen = () => {
 				index === self.findIndex((t) => t[1] === item[1])
 		);
 		setTestsTitles(test_temp);
-	}, [navigation]);
+	}, [refresh]);
 
 	// TODO: test it
 
