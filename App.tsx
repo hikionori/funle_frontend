@@ -54,7 +54,7 @@ export default function App() {
       // console.log("token", token);
       getCourse("647724281951420a1476048e", token);
     } 
-  }, []);
+  });
 
   if (!fontLoaded) {
     return null;

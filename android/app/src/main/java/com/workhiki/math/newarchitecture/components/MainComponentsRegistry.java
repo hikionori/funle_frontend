@@ -1,4 +1,4 @@
-package com.funle.newarchitecture.components;
+package com.workhiki.math.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
