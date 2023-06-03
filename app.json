@@ -6,7 +6,7 @@
 		"expo-community-flipper"
 	],
     "slug": "funlemathapp",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
@@ -23,7 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.workhiki.math"
+      "bundleIdentifier": "com.funle.funle"
     },
     "android": {
       "adaptiveIcon": {
