@@ -16,6 +16,7 @@ import { StatusBar } from "expo-status-bar";
 
 import styles from "./styles";
 import useAuthStore from "../../../logic/auth";
+import useUserStore from "../../../logic/main/user_zuzstand";
 
 const LoginScreen = ({ navigation }: any) => {
     const [email, setEmail] = React.useState("");
@@ -27,6 +28,8 @@ const LoginScreen = ({ navigation }: any) => {
     const login: any = useAuthStore((state: any) => state.login);
 
     const setAuth = useAuthStore((state: any) => state.setAuth); //! debug
+
+    const developer = useUserStore((state: any) => state.developer);
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidShow", () => {

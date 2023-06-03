@@ -4,8 +4,14 @@ import { get_user_info, User, UserProgress, add_course_to_user, add_info_to_user
 const useUserStore = create((set, get: any) => ({
     user: {},
 
+    developer: false,
+
     getUser: () => {
         return get().user as User;
+    },
+
+    setDeveloper: (value: boolean) => {
+        set({ developer: value });
     },
 
     getUserInfo: async (token: string) => {

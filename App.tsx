@@ -33,7 +33,6 @@ export default function App() {
   const getCourse: (course_id: string, token: string) => any = useCourse(
     (state: any) => state.getCourse
   );
-
   useEffect(() => {
     AsyncStorage.getItem("token").then((value) => {
       if (value) {

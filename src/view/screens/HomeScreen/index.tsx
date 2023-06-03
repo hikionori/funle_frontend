@@ -16,6 +16,8 @@ import { StatusBar } from "expo-status-bar";
 import useInfo from "../../../logic/main/info_zustand";
 import useAuthStore from "../../../logic/auth";
 import { ScrollView } from "native-base";
+import useUserStore from "../../../logic/main/user_zuzstand";
+import { useIsFocused } from "@react-navigation/native";
 
 const HomeScreen = ({ navigation }: any) => {
 	// const setLevels = useCourse((state: any) => state.setLevels);
@@ -24,6 +26,12 @@ const HomeScreen = ({ navigation }: any) => {
 
 	const getTestsAPI = useTests((state: any) => state.getTestsAPI);
 	const getInfo = useInfo((state: any) => state.getInfo);
+	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
+	const isFocused = useIsFocused();
+
+	useEffect(() => {
+		getUserInfo(token);
+	}, [isFocused]);
 
 	return (
 		<SafeAreaView>

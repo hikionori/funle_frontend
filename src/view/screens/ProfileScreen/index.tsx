@@ -14,7 +14,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { Spacer } from "native-base";
 import useAuthStore from "../../../logic/auth";
 import useUserStore from "../../../logic/main/user_zuzstand";
@@ -27,6 +27,7 @@ const ProfileScreen = () => {
 	const token = useAuthStore((state: any) => state.token);
 
 	const user = useUserStore((state: any) => state.user);
+	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
 
 	// user progress in tests
 	const tests: string[] = user.progress.tests; // id array of tests
@@ -45,7 +46,7 @@ const ProfileScreen = () => {
 	const [testsVisibility, setTestsVisibility] =
 		React.useState<boolean>(false);
 
-	const [refresh, setRefresh] = React.useState<boolean>(false);
+	const isFocused = useIsFocused();
 
 	const handleInfosVisibility = async () => {
 		setInfosVisibility(!infosVisibility);
@@ -56,6 +57,8 @@ const ProfileScreen = () => {
 	};
 
 	useEffect(() => {
+		getUserInfo(token);
+
 		let info_temp: string[][] = [];
 		for (let i = 0; i < infos_count; i++) {
 			getInfo(infos[i], token).then((res) => {
@@ -87,7 +90,7 @@ const ProfileScreen = () => {
 				index === self.findIndex((t) => t[1] === item[1])
 		);
 		setTestsTitles(test_temp);
-	}, [navigation]);
+	}, [isFocused]);
 
 	// TODO: test it
 
