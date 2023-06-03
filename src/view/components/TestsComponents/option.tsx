@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -6,18 +6,22 @@ interface OptionProps {
 	label: string;
 	value: string;
 	onPress: Function;
+	isSelected: boolean;
 }
 
-const Option = ({ label, value, onPress }: OptionProps) => {
-	const [selected, setSelected] = useState(false);
+const Option = ({ label, value, onPress, isSelected }: OptionProps) => {
+	const [selected, setSelected] = useState(isSelected);
 	const handlePress = () => {
 		setSelected(!selected);
 		if (!selected) {
             onPress(value);
+			setSelected(!selected);
         } else {
             onPress("");
+			setSelected(!selected);
         }
 	};
+
 	return (
 		<View
 			style={{

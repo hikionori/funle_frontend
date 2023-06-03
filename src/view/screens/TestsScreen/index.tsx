@@ -16,6 +16,8 @@ import Option from "../../components/TestsComponents/option";
 import { TextArea, TextField } from "native-base";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import useAuthStore from "../../../logic/auth";
+import sha256 from "crypto-js/sha256";
+
 
 const TestsScreen = ({ navigation }: any) => {
 	// after clicking on the cell, we get the ids from the cell and pass it to useTests hook,
@@ -40,6 +42,7 @@ const TestsScreen = ({ navigation }: any) => {
 
 	const [answer, setAnswer] = useState(""); // value of the answer
 	const [actions, setActions] = useState<string[]>([]); // array of actions [action1, action2, ...] if activeTest.level === 2
+	const [isSelected, setIsSelected] = useState<boolean>(false);
 
 	const [keyboardVisible, setKeyboardVisible] = useState(false);
 
@@ -106,7 +109,7 @@ const TestsScreen = ({ navigation }: any) => {
 						paddingBottom: 60,
 					}}
 					showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
+					showsHorizontalScrollIndicator={false}
 				>
 					<View style={styles.container}>
 						<View style={styles.boxGroup}>
@@ -161,13 +164,14 @@ const TestsScreen = ({ navigation }: any) => {
 							{activeTest && activeTest.level === 1 ? (
 								<View style={styles.options}>
 									{activeTest.answers.map(
-										(item: any, index: number) => {
+										(item: string, index: number) => {
 											return (
 												<Option
-													key={index}
+													key={sha256(item + index).toString().slice(0, 20)}
 													label={item}
 													value={item}
 													onPress={setAnswer}
+													isSelected={isSelected}
 												/>
 											);
 										}
@@ -248,12 +252,23 @@ const TestsScreen = ({ navigation }: any) => {
 							backgroundColor: "#00BFA6",
 						}}
 						onPress={() => {
+							let t_answer =
+								activeTest && activeTest.level === 1
+									? answer
+									: actions[actions.length - 1];
 
-							let t_answer = activeTest && activeTest.level === 1 ? answer : actions[actions.length - 1];
+							let res: TestState = answerHandler(
+								t_answer,
+								user_id,
+								token
+							);
+							// clear options
+							setAnswer("");
+							setActions([]);
+							setIsSelected(false);
 
-							let res: TestState = answerHandler(t_answer, user_id, token);
 							if (res === TestState.Next) {
-								navigation.navigate("Tests")
+								navigation.navigate("Tests");
 							}
 							// if res is TestState.Stop, navigate to MainScreen
 							if (res === TestState.Stop) {
@@ -272,8 +287,12 @@ const TestsScreen = ({ navigation }: any) => {
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
-						style={{ ...styles.btn,
-							display: activeTest && activeTest.level === 2 ? "flex" : "none",
+						style={{
+							...styles.btn,
+							display:
+								activeTest && activeTest.level === 2
+									? "flex"
+									: "none",
 						}}
 						onPress={() => {
 							// add new action
@@ -294,7 +313,7 @@ const TestsScreen = ({ navigation }: any) => {
 								size={25}
 								color="white"
 							/>
-							Дадати дію
+							Додати дію
 						</Text>
 					</TouchableOpacity>
 				</View>
