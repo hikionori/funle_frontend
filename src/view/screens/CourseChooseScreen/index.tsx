@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -13,26 +13,40 @@ import useCourse from "../../../logic/main/course_zustand";
 import useAuthStore from "../../../logic/auth";
 
 const CourseChooseScreen = () => {
+	const token = useAuthStore((state: any) => state.token);
+	const getAllCourses = useCourse((state: any) => state.getAllCourses);
 
-    const token = useAuthStore((state: any) => state.token);
-    const getAllCourses = useCourse((state: any) => state.getAllCourses);
+	// const courses: any[] = getAllCourses(token).then((res: any) => {
+	// 	return res;
+	// });
 
-    const courses = getAllCourses(token).then((res: any) => {
-        return res;
-    });
+	// const prepareCoursesData = (courses: any) => {
+	// 	let data: string[][] = [];
+	// 	for (let i = 0; i < courses.length; i++) {
+	// 		data.push([
+	// 			courses[i].id.$oid,
+	// 			courses[i].title,
+	// 			courses[i].description,
+	// 		]);
+	// 	}
+	// 	return data;
+	// };
 
-    const prepareCoursesData = (courses: any) => {
-        let data: string[][] = [];
-        courses.forEach((course: any) => {
-            data.push([course.id.$oid, course.title, course.description]);
-        });
-        return data;
-    };
+	// const coursesData: string[][] = prepareCoursesData(courses);
+
+    // useEffect(() => {
+    //     console.log(coursesData);
+    // }, []);
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<View>
-				<Text>CourseChooseScreen</Text>
+		<SafeAreaView>
+			<View
+				style={{
+					flex: 1,
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
 			</View>
 		</SafeAreaView>
 	);

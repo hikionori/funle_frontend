@@ -16,12 +16,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
-	AsyncStorage,
 	Button,
 	Text,
 	TouchableOpacity,
 	View,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IconButton } from "native-base";
 import AfterTestsScreen from "../screens/AfterTestsScreen";
 import CourseChooseScreen from "../screens/CourseChooseScreen";
@@ -196,7 +196,7 @@ export const AppNavigation = () => {
 
 	return (
 		<Stack.Navigator
-			initialRouteName="Home"
+			initialRouteName="MainScreen"
 			screenOptions={{
 				headerShown: false,
 				gestureEnabled: false,
@@ -257,6 +257,8 @@ export const AppNavigation = () => {
 				component={CourseChooseScreen}
 				options={{
 					gestureEnabled: false,
+					fullScreenGestureEnabled: false,
+					headerShown: false,
 				}}
 			/>
 		</Stack.Navigator>

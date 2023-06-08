@@ -10,7 +10,7 @@ import useAuthStore from "./src/logic/auth";
 import useCourse from "./src/logic/main/course_zustand";
 import useUserStore from "./src/logic/main/user_zuzstand";
 
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
 	const [fontLoaded] = useFonts({
