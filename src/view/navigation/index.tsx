@@ -18,6 +18,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Button, Text, TouchableOpacity, View } from "react-native";
 import { IconButton } from "native-base";
 import AfterTestsScreen from "../screens/AfterTestsScreen";
+import CourseChooseScreen from "../screens/CourseChooseScreen";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
@@ -40,8 +41,7 @@ export type TestsNavigationParams = {
 };
 
 export const HomeNavScreens = ({ navigation }: any) => {
-
-  const logout = useAuthStore((state: any) => state.logout);
+	const logout = useAuthStore((state: any) => state.logout);
 
 	return (
 		<HomeNavigation.Navigator
@@ -224,10 +224,8 @@ export const AppNavigation = () => {
 					),
 				}}
 			/>
-			<Stack.Screen 
-				name="AfterTests"
-				component={AfterTestsScreen}
-			/>
+			<Stack.Screen name="AfterTests" component={AfterTestsScreen} />
+			<Stack.Screen name="CourseChoose" component={CourseChooseScreen} />
 		</Stack.Navigator>
 	);
 };
