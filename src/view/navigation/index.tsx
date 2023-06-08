@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button, Text, TouchableOpacity, View } from "react-native";
 import { IconButton } from "native-base";
+import AfterTestsScreen from "../screens/AfterTestsScreen";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
@@ -222,6 +223,10 @@ export const AppNavigation = () => {
 						</View>
 					),
 				}}
+			/>
+			<Stack.Screen 
+				name="AfterTests"
+				component={AfterTestsScreen}
 			/>
 		</Stack.Navigator>
 	);

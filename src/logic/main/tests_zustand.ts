@@ -70,7 +70,7 @@ const useTests = create((set, get: any) => ({
 					add_test_to_user(id, user_id, token);
 				}
 			}
-			get().reset();
+			// get().reset();
 			return TestState.Stop;
 		}
 		// increase index
