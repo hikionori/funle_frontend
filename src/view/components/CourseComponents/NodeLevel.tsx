@@ -23,6 +23,7 @@ export default function NodeLevel(props: NodeLevelProps) {
                             id={node.id}
                             ids={node?.ids}
                             mini_image={node.mini_image}
+                            mini_image_success={node.mini_image_success}
                             title={node.title}
                             type_= {node.type_}
                             key={index}
