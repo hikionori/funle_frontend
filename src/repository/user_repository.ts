@@ -144,6 +144,25 @@ const add_test_to_user = async (
 	}
 };
 
+const add_node_to_user = async (
+	p_node_id: string,
+	p_user_id: string,
+	token: string
+) => {
+	let data = {
+		node_id: p_node_id,
+		user_id: p_user_id,
+	};
+	var response = await axios
+		.put(baseUrl + `/user/${token}/pass/node`, data)
+		.catch((error) => {
+			console.log(error);
+		});
+	if (response) {
+		return response.data;
+	}
+};
+
 export {
 	auth,
 	login,
@@ -152,4 +171,5 @@ export {
 	add_course_to_user,
 	add_info_to_user,
 	add_test_to_user,
+	add_node_to_user,
 };
