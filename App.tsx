@@ -29,9 +29,6 @@ export default function App() {
 	// const navigation = useNavigation();
 
 	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
-	
-
-	// TODO: load and compute something before render
 
 	useEffect(() => {
 		AsyncStorage.getItem("token").then((value) => {

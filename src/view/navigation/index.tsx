@@ -170,6 +170,8 @@ export const AuthNavScreens = () => {
 	);
 };
 
+export const CourseChooseNavScreens = () => {};
+
 export const AppNavigation = () => {
 	const { loggedIn } = useAuthStore((state: any) => state.loggedIn);
 	const Stack = createNativeStackNavigator();
@@ -250,7 +252,13 @@ export const AppNavigation = () => {
 				}}
 			/>
 			<Stack.Screen name="AfterTests" component={AfterTestsScreen} />
-			<Stack.Screen name="CourseChoose" component={CourseChooseScreen} />
+			<Stack.Screen
+				name="CourseChoose"
+				component={CourseChooseScreen}
+				options={{
+					gestureEnabled: false,
+				}}
+			/>
 		</Stack.Navigator>
 	);
 };
