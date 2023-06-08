@@ -18,11 +18,9 @@ import useUserStore from "../../../logic/main/user_zuzstand";
 import useAuthStore from "../../../logic/auth";
 import sha256 from "crypto-js/sha256";
 
-
-const TestsScreen = ({ navigation }: any) => {
-	// after clicking on the cell, we get the ids from the cell and pass it to useTests hook,
-	// next in useTests hook we get all tests by ids, after we pop first test and pass it to the useActiveTest hook,
-	// and then we get data from useActiveTest hook and pass it to the TestScreen
+const TestsScreen = ({ route, navigation }: any) => {
+	const node_id = route.params; // test it
+	const addNodeToProgress = useUserStore((state: any) => state.addNodeToProgress);
 
 	const questions = useTests((state: any) => state.tests);
 	const activeTestIndex = useTests((state: any) => state.activeTestIndex);
@@ -86,7 +84,7 @@ const TestsScreen = ({ navigation }: any) => {
 			),
 		});
 		//*
-
+		console.log(node_id)
 		//! debug
 		// fill progress array with two 0, 3 1 and 2 undefined
 		// setProgress([]);
@@ -167,7 +165,9 @@ const TestsScreen = ({ navigation }: any) => {
 										(item: string, index: number) => {
 											return (
 												<Option
-													key={sha256(item + index).toString().slice(0, 20)}
+													key={sha256(item + index)
+														.toString()
+														.slice(0, 20)}
 													label={item}
 													value={item}
 													onPress={setAnswer}
@@ -272,7 +272,7 @@ const TestsScreen = ({ navigation }: any) => {
 							}
 							// if res is TestState.Stop, navigate to MainScreen
 							if (res === TestState.Stop) {
-								navigation.navigate("AfterTests");
+								navigation.navigate("AfterTests", node_id);
 							}
 						}}
 					>
