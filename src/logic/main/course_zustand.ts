@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import useAuthStore from "../auth";
-import { getCourse } from "../../repository/course_repository";
+import { getAllCourses, getCourse } from "../../repository/course_repository";
+import { AsyncStorage } from "react-native";
 
 // const userToken = useAuthStore((state: any) => state.token)
 
@@ -49,7 +50,13 @@ const useCourse = create((set, get: any) => ({
             description: course.description,
             levels: levels,
         });
+        AsyncStorage.setItem("activeCourse", course._id.$oid);
     },
+
+    getAllCourses: async (token: string) => {
+        const courses = await getAllCourses(token);
+        return courses;
+    }
 
 }));
 

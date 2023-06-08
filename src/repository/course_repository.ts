@@ -8,4 +8,10 @@ const getCourse = async (courseId: string, token: string) => {
     return response.data;
 };
 
-export { getCourse };
+const getAllCourses = async (token: string) => {
+    // url = `${baseUrl}/user/${token}/get/cources/all`
+    const response = await axios.get(`${baseUrl}/user/${token}/get/cources/all`);
+    return response.data;
+};
+
+export { getCourse, getAllCourses };
