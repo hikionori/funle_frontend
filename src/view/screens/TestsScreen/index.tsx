@@ -272,7 +272,7 @@ const TestsScreen = ({ navigation }: any) => {
 							}
 							// if res is TestState.Stop, navigate to MainScreen
 							if (res === TestState.Stop) {
-								navigation.navigate("MainScreen");
+								navigation.navigate("AfterTests");
 							}
 						}}
 					>
