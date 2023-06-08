@@ -18,14 +18,16 @@ export default function NodeLevelTree(props: NodeLevelTreeProps) {
 
 	const levels = useCourse((state: any) => state.levels);
 	const user = useUserStore((state: any) => state.user);
-  const token = useAuthStore((state: any) => state.token);
+	const token = useAuthStore((state: any) => state.token);
 	const getCourse = useCourse((state: any) => state.getCourse);
+	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
 
 	React.useEffect(() => {
 		AsyncStorage.getItem("activeCourse").then((value) => {
 			if (value) {
 				setCourse_id(value);
 				getCourse(value, token);
+				// getUserInfo(token);
 			}
 		});
 	}, [user]);

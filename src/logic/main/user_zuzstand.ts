@@ -51,6 +51,7 @@ const useUserStore = create((set, get: any) => ({
 	// pass node
 	addNodeToProgress: (nodeId: string, token: string) => {
 		add_node_to_user(nodeId, get().user._id.$oid, token);
+		get().getUserInfo(token);
 	},
 }));
 
