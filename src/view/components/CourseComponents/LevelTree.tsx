@@ -6,6 +6,7 @@ import NodeLevel from "./NodeLevel";
 import useUserStore from "../../../logic/main/user_zuzstand";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useAuthStore from "../../../logic/auth";
 
 interface NodeLevelTreeProps {
 	onNodeInfoPress: Function;
@@ -17,13 +18,14 @@ export default function NodeLevelTree(props: NodeLevelTreeProps) {
 
 	const levels = useCourse((state: any) => state.levels);
 	const user = useUserStore((state: any) => state.user);
+  const token = useAuthStore((state: any) => state.token);
 	const getCourse = useCourse((state: any) => state.getCourse);
 
 	React.useEffect(() => {
 		AsyncStorage.getItem("activeCourse").then((value) => {
 			if (value) {
 				setCourse_id(value);
-				getCourse(value, user.token);
+				getCourse(value, token);
 			}
 		});
 	}, [user]);

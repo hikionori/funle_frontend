@@ -57,11 +57,11 @@ const HomeScreen = ({ navigation }: any) => {
 					<NodeLevelTree
 						onNodeInfoPress={(ids: string[], id: string) => {
 							getInfo(ids, token);
-							navigation.navigate("Info", id);
+							navigation.navigate("Info", {id});
 						}}
 						onNodeTestPress={(ids: string[], id: string) => {
 							getTestsAPI(ids);
-							navigation.navigate("Tests", id);
+							navigation.navigate("Tests", {id});
 						}}
 					/>
 				</ScrollView>

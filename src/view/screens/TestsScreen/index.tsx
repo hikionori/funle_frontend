@@ -20,7 +20,6 @@ import sha256 from "crypto-js/sha256";
 
 const TestsScreen = ({ route, navigation }: any) => {
 	const node_id = route.params; // test it
-	const addNodeToProgress = useUserStore((state: any) => state.addNodeToProgress);
 
 	const questions = useTests((state: any) => state.tests);
 	const activeTestIndex = useTests((state: any) => state.activeTestIndex);
@@ -84,7 +83,6 @@ const TestsScreen = ({ route, navigation }: any) => {
 			),
 		});
 		//*
-		console.log(node_id)
 		//! debug
 		// fill progress array with two 0, 3 1 and 2 undefined
 		// setProgress([]);
@@ -196,7 +194,7 @@ const TestsScreen = ({ route, navigation }: any) => {
 															"#E67B02"
 														}
 														onChangeText={(
-															text
+															text: string
 														) => {
 															let temp = [
 																...actions,
@@ -267,12 +265,11 @@ const TestsScreen = ({ route, navigation }: any) => {
 							setActions([]);
 							setIsSelected(false);
 
-							if (res === TestState.Next) {
-								navigation.navigate("Tests");
-							}
 							// if res is TestState.Stop, navigate to MainScreen
 							if (res === TestState.Stop) {
-								navigation.navigate("AfterTests", node_id);
+								navigation.navigate("AfterTests", {
+									id: node_id.id
+								});
 							}
 						}}
 					>

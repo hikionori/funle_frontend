@@ -42,8 +42,14 @@ export default function App() {
       if (loggedIn) {
         getUserInfo(token);
         // console.log("token", token);
-        AsyncStorage.setItem("activeCourse", "647724281951420a1476048e");
-        getCourse("647724281951420a1476048e", token); // TODO: change this to user chosen course
+        AsyncStorage.setItem("activeCourse", "647724281951420a1476048e").then(() => {
+          console.log("activeCourse set")
+        });
+        getCourse("647724281951420a1476048e", token).then(
+          () => {
+            console.log("course loaded");
+          }
+        ); // TODO: change this to user chosen course
       }
     });
   });

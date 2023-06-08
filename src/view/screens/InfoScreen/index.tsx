@@ -36,7 +36,7 @@ const InfoScreen = ({route, navigation }: any) => {
       addInfoToProgress(id, token);
     }
   }
-
+  
   return (
     <ImageBackground
       source={require("../../../../assets/images/bg.png")}
@@ -66,7 +66,7 @@ const InfoScreen = ({route, navigation }: any) => {
           onPress={() => {
             // go back
             addInfoToProgress(id, token);
-            addNodeToProgress(node_id, token);
+            addNodeToProgress(node_id.id, token);
             navigation.navigate("MainScreen");
           }}
         >
