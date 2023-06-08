@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 
 import { AuthNavScreens, AppNavigation } from "./src/view/navigation";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { NativeBaseProvider } from "native-base";
 
@@ -26,15 +26,11 @@ export default function App() {
 
 	const token: string = useAuthStore((state: any) => state.token);
 	const auth = useAuthStore((state: any) => state.auth);
+	// const navigation = useNavigation();
 
 	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
-	const getCourse: (course_id: string, token: string) => any = useCourse(
-		(state: any) => state.getCourse
-	);
+	
 
-  
-
-	// TODO: active course
 	// TODO: load and compute something before render
 
 	useEffect(() => {
@@ -45,7 +41,7 @@ export default function App() {
 			if (loggedIn) {
 				getUserInfo(token);
 				// console.log("token", token);
-				getCourse("647724281951420a1476048e", token); // TODO: change this to user chosen course
+				// getCourse("647724281951420a1476048e", token);
 			}
 		});
 	});

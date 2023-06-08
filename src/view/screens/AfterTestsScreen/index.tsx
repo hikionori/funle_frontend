@@ -67,9 +67,6 @@ const AfterTestsScreen = () => {
                             marginBottom: 20,
 						}}
 					/>
-					{
-						// TODO: add styles
-					}
 					<View>
 						<Text
                             style={{
@@ -86,9 +83,6 @@ const AfterTestsScreen = () => {
 								: "Ой..ю\nЩось пішло не так"}
 						</Text>
 					</View>
-					{
-						// TODO: add styles
-					}
 					<View>
 						<Text
                             style={{

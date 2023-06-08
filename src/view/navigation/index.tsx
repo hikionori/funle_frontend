@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -8,17 +8,24 @@ import InfoScreen from "../screens/InfoScreen";
 import TestsScreen from "../screens/TestsScreen";
 import useAuthStore from "../../logic/auth";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Button, Text, TouchableOpacity, View } from "react-native";
+import {
+	AsyncStorage,
+	Button,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import { IconButton } from "native-base";
 import AfterTestsScreen from "../screens/AfterTestsScreen";
 import CourseChooseScreen from "../screens/CourseChooseScreen";
+import useCourse from "../../logic/main/course_zustand";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
@@ -166,6 +173,24 @@ export const AuthNavScreens = () => {
 export const AppNavigation = () => {
 	const { loggedIn } = useAuthStore((state: any) => state.loggedIn);
 	const Stack = createNativeStackNavigator();
+	const token = useAuthStore((state: any) => state.token);
+
+	const navigation = useNavigation();
+
+	const getCourse: (course_id: string, token: string) => any = useCourse(
+		(state: any) => state.getCourse
+	);
+
+	useEffect(() => {
+		AsyncStorage.getItem("activeCourse").then((value) => {
+			if (value) {
+				getCourse(value, token);
+			} else {
+				// @ts-ignore
+				navigation.navigate("CourseChoose");
+			}
+		});
+	}, []);
 
 	return (
 		<Stack.Navigator
