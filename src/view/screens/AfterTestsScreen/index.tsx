@@ -10,7 +10,8 @@ import {
 import useTests from "../../../logic/main/tests_zustand";
 import { useNavigation } from "@react-navigation/native";
 
-const AfterTestsScreen = () => {
+const AfterTestsScreen = (route: {params: {id: string}}) => {
+	const node_id = route.params.id;
 	const progress: Array<any> = useTests((state: any) => state.progress);
 	const reset = useTests((state: any) => state.reset);
 
