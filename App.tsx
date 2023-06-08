@@ -31,7 +31,7 @@ export default function App() {
 	const getUserInfo = useUserStore((state: any) => state.getUserInfo);
 
 	useEffect(() => {
-		AsyncStorage.setItem("activeCourse", "647724281951420a1476048e");
+		AsyncStorage.setItem("activeCourse", "647724281951420a1476048e"); //! debug // TODO: remove
 		AsyncStorage.getItem("token").then((value) => {
 			if (value) {
 				auth(value);
