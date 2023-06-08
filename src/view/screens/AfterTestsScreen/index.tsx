@@ -46,43 +46,64 @@ const AfterTestsScreen = () => {
 					justifyContent: "center",
 				}}
 			>
-				{
-					// TODO: add styles
-				}
-				<View>
+				<View
+					style={{
+						top: 165,
+                        // center
+                        alignItems: "center",
+					}}
+				>
 					<Image
 						source={
 							state === 1
-								? require("../../../../assets/images/All right.png")
+								? require("../../../../assets/images/all-right.png")
 								: state === 2
-								? require("../../../../assets/images/Something wrong.png")
-								: require("../../../../assets/images/App error.png")
+								? require("../../../../assets/images/something-wrong.png")
+								: require("../../../../assets/images/app-error.png")
 						}
+						style={{
+							width: 172,
+							height: 170,
+                            marginBottom: 20,
+						}}
 					/>
-				</View>
-				{
-					// TODO: add styles
-				}
-				<View>
-					<Text>
-						{state === 1
-							? "Ти все пройшов!!"
-							: state === 2
-							? "Нажаль ти не пройшов всі тести"
-							: "Ой..ю\nЩось пішло не так"}
-					</Text>
-				</View>
-				{
-					// TODO: add styles
-				}
-				<View>
-					<Text>
-						{state === 1
-							? "Тепер можна йти далі"
-							: state === 2
-							? "Спробуй ще.\nМи віримо в тебе все вийде"
-							: "Спробуй ще раз трохи пізніше"}
-					</Text>
+					{
+						// TODO: add styles
+					}
+					<View>
+						<Text
+                            style={{
+                                fontSize: 32,
+                                fontFamily: "MacPawFixelDisplay-Black",
+                                marginBottom: 20,
+                                textAlign: "center",
+                            }}
+                        >
+							{state === 1
+								? "Ти все пройшов!!"
+								: state === 2
+								? "Нажаль ти не пройшов всі тести"
+								: "Ой..ю\nЩось пішло не так"}
+						</Text>
+					</View>
+					{
+						// TODO: add styles
+					}
+					<View>
+						<Text
+                            style={{
+                                fontSize: 20,
+                                fontFamily: "MacPawFixelDisplay-Regular",
+                                textAlign: "center",
+                            }}
+                        >
+							{state === 1
+								? "Тепер можна йти далі"
+								: state === 2
+								? "Спробуй ще.\nМи віримо в тебе все вийде"
+								: "Спробуй ще раз трохи пізніше"}
+						</Text>
+					</View>
 				</View>
 				<View
 					style={{
@@ -108,9 +129,16 @@ const AfterTestsScreen = () => {
 						onPress={() => {
 							// @ts-ignore
 							navigator.navigate("MainScreen");
+                            reset();
 						}}
 					>
-						<Text>Go to home</Text>
+						<Text
+                            style={{
+                                fontSize: 20,
+                                fontFamily: "MacPawFixelDisplay-Bold",
+                                color: "#fff",
+                            }}
+                        >На головний екран</Text>
 					</TouchableOpacity>
 				</View>
 			</ImageBackground>

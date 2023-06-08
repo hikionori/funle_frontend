@@ -20,6 +20,7 @@ export default function App() {
     "MacPawFixelDisplay-Black": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Black.ttf"),
     "MacPawFixelDisplay-Bold": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Bold.ttf"),
     "MacPawFixelDisplay-Medium": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Medium.ttf"),
+    "MacPawFixelDisplay-Regular": require("./assets/fonts/MacPawFixelDisplay/OpenType-TT/MacPawFixelDisplay-Regular.ttf"),
     "MacPawFixelText-Regular": require("./assets/fonts/MacPawFixelText/OpenType-TT/MacPawFixelText-Regular.ttf"),
     "MacPawFixel-VF": require("./assets/fonts/MacPawFixel/MacPawFixel-VF.ttf"),
   });
@@ -41,7 +42,7 @@ export default function App() {
       if (loggedIn) {
         getUserInfo(token);
         // console.log("token", token);
-        getCourse("647724281951420a1476048e", token);
+        getCourse("647724281951420a1476048e", token); // TODO: change this to user chosen course
       }
     });
   });
