@@ -92,8 +92,6 @@ const ProfileScreen = () => {
 		setTestsTitles(test_temp);
 	}, [isFocused]);
 
-	// TODO: test it
-
 	return (
 		<SafeAreaView>
 			<StatusBar style="light" />

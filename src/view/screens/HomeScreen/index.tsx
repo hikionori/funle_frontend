@@ -18,11 +18,15 @@ import useAuthStore from "../../../logic/auth";
 import { ScrollView } from "native-base";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import { useIsFocused } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }: any) => {
 	// const setLevels = useCourse((state: any) => state.setLevels);
 
 	const token = useAuthStore((state: any) => state.token);
+	const activeCourseId = AsyncStorage.getItem("activeCourse");
+
+	const getCourse = useCourse((state: any) => state.getCourse);
 
 	const getTestsAPI = useTests((state: any) => state.getTestsAPI);
 	const getInfo = useInfo((state: any) => state.getInfo);
@@ -31,6 +35,8 @@ const HomeScreen = ({ navigation }: any) => {
 
 	useEffect(() => {
 		getUserInfo(token);
+		getCourse(activeCourseId, token);
+		
 	}, [isFocused]);
 
 	return (

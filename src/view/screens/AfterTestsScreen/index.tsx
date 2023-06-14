@@ -73,9 +73,6 @@ const AfterTestsScreen = ({route, navigation}: any) => {
                             marginBottom: 20,
 						}}
 					/>
-					{
-						// TODO: add styles
-					}
 					<View>
 						<Text
                             style={{
@@ -92,9 +89,6 @@ const AfterTestsScreen = ({route, navigation}: any) => {
 								: "Ой..ю\nЩось пішло не так"}
 						</Text>
 					</View>
-					{
-						// TODO: add styles
-					}
 					<View>
 						<Text
                             style={{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -8,16 +8,24 @@ import InfoScreen from "../screens/InfoScreen";
 import TestsScreen from "../screens/TestsScreen";
 import useAuthStore from "../../logic/auth";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Button, Text, TouchableOpacity, View } from "react-native";
-import { IconButton } from "native-base";
+import {
+	Button,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Icon, IconButton } from "native-base";
 import AfterTestsScreen from "../screens/AfterTestsScreen";
+import CourseChooseScreen from "../screens/CourseChooseScreen";
+import useCourse from "../../logic/main/course_zustand";
 
 export const HomeNavigation = createBottomTabNavigator();
 export const AuthNavigation = createNativeStackNavigator();
@@ -40,8 +48,8 @@ export type TestsNavigationParams = {
 };
 
 export const HomeNavScreens = ({ navigation }: any) => {
-
-  const logout = useAuthStore((state: any) => state.logout);
+	const logout = useAuthStore((state: any) => state.logout);
+	const leaveCourse = useCourse((state: any) => state.leaveCourse);
 
 	return (
 		<HomeNavigation.Navigator
@@ -113,6 +121,8 @@ export const HomeNavScreens = ({ navigation }: any) => {
 							<View
 								style={{
 									flexDirection: "row",
+									justifyContent: "space-between",
+									marginRight: 10,
 								}}
 							>
 								<IconButton
@@ -124,6 +134,16 @@ export const HomeNavScreens = ({ navigation }: any) => {
 										/>
 									}
 									onPress={() => logout()}
+								/>
+								<IconButton 
+									icon={
+										<MaterialCommunityIcons
+											name="book-arrow-left-outline"
+											size={24}
+											color="white"
+										/>
+									}
+									onPress={() => leaveCourse()}
 								/>
 							</View>
 						);
@@ -163,13 +183,34 @@ export const AuthNavScreens = () => {
 	);
 };
 
+export const CourseChooseNavScreens = () => {};
+
 export const AppNavigation = () => {
 	const { loggedIn } = useAuthStore((state: any) => state.loggedIn);
 	const Stack = createNativeStackNavigator();
+	const token = useAuthStore((state: any) => state.token);
+	const course_id = useCourse((state: any) => state.id);
+
+	const navigation = useNavigation();
+
+	const getCourse: (course_id: string, token: string) => any = useCourse(
+		(state: any) => state.getCourse
+	);
+
+	useEffect(() => {
+		AsyncStorage.getItem("activeCourse").then((value) => {
+			if (value) {
+				getCourse(value, token);
+			} else {
+				// @ts-ignore
+				navigation.navigate("CourseChoose");
+			}
+		});
+	}, []);
 
 	return (
 		<Stack.Navigator
-			initialRouteName="Home"
+			initialRouteName={course_id ? "MainScreen" : "CourseChoose"}
 			screenOptions={{
 				headerShown: false,
 				gestureEnabled: false,
@@ -224,9 +265,15 @@ export const AppNavigation = () => {
 					),
 				}}
 			/>
-			<Stack.Screen 
-				name="AfterTests"
-				component={AfterTestsScreen}
+			<Stack.Screen name="AfterTests" component={AfterTestsScreen} />
+			<Stack.Screen
+				name="CourseChoose"
+				component={CourseChooseScreen}
+				options={{
+					gestureEnabled: false,
+					fullScreenGestureEnabled: false,
+					headerShown: false,
+				}}
 			/>
 		</Stack.Navigator>
 	);
