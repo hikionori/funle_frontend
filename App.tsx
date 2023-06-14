@@ -36,13 +36,12 @@ export default function App() {
 				auth(value);
 			}
 			if (loggedIn) {
-				getUserInfo(token)
+				getUserInfo(token);
 				// console.log("token", token);
 				// getCourse("647724281951420a1476048e", token);
 			}
 		});
-	}, []);
-
+	});
 	if (!fontLoaded) {
 		return null;
 	}

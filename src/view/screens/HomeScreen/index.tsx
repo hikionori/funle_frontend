@@ -34,9 +34,7 @@ const HomeScreen = ({ navigation }: any) => {
 	const isFocused = useIsFocused();
 
 	useEffect(() => {
-		getUserInfo(token);
-		getCourse(activeCourseId, token);
-		
+		getUserInfo(token);		
 	}, [isFocused]);
 
 	return (
