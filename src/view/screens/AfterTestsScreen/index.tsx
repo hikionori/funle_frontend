@@ -9,10 +9,16 @@ import {
 } from "react-native";
 import useTests from "../../../logic/main/tests_zustand";
 import { useNavigation } from "@react-navigation/native";
+import useUserStore from "../../../logic/main/user_zuzstand";
+import useAuthStore from "../../../logic/auth";
 
-const AfterTestsScreen = () => {
+const AfterTestsScreen = ({route, navigation}: any) => {
+	const node_id = route.params; // test it
+
+	const token = useAuthStore((state: any) => state.token);
 	const progress: Array<any> = useTests((state: any) => state.progress);
 	const reset = useTests((state: any) => state.reset);
+	const addNodeToProgress = useUserStore((state: any) => state.addNodeToProgress);
 
 	const navigator = useNavigation();
 
@@ -124,6 +130,7 @@ const AfterTestsScreen = () => {
 							// @ts-ignore
 							navigator.navigate("MainScreen");
                             reset();
+							state === 1 && addNodeToProgress(node_id.id, token);
 						}}
 					>
 						<Text

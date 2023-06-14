@@ -61,18 +61,13 @@ const HomeScreen = ({ navigation }: any) => {
                     showsHorizontalScrollIndicator={false}
 				>
 					<NodeLevelTree
-						onNodeInfoPress={(ids: string[]) => {
+						onNodeInfoPress={(ids: string[], id: string) => {
 							getInfo(ids, token);
-							navigation.navigate("Info");
+							navigation.navigate("Info", {id});
 						}}
-						onNodeTestPress={(ids: string[]) => {
+						onNodeTestPress={(ids: string[], id: string) => {
 							getTestsAPI(ids);
-							navigation.navigate("Tests", {
-								id: "2",
-								question: "2 * 2 = ?",
-								answers: ["2", "4", "6", "8"],
-								answer: "4",
-							});
+							navigation.navigate("Tests", {id});
 						}}
 					/>
 				</ScrollView>

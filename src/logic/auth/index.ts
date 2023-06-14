@@ -5,7 +5,7 @@ import {
 	register,
 	UserRole,
 } from "../../repository/user_repository";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useAuthStore = create((set, get: any) => ({
 	loggedIn: false,

@@ -16,7 +16,9 @@ import LevelTreeInfo from "../../components/InfosComponents/LevelTree";
 import useUserStore from "../../../logic/main/user_zuzstand";
 import useAuthStore from "../../../logic/auth";
 
-const InfoScreen = ({ navigation }: any) => {
+const InfoScreen = ({route, navigation }: any) => {
+  const node_id = route.params; // test it
+
   const id = useInfo((state: any) => state.id);
   const title = useInfo((state: any) => state.title);
   const content_levels = useInfo((state: any) => state.content_levels);
@@ -24,6 +26,7 @@ const InfoScreen = ({ navigation }: any) => {
   const token = useAuthStore((state: any) => state.token);
 
   const addInfoToProgress = useUserStore((state: any) => state.addInfoToProgress);
+  const addNodeToProgress = useUserStore((state: any) => state.addNodeToProgress);
   
 
   const handleScroll = (event: any) => {
@@ -33,7 +36,7 @@ const InfoScreen = ({ navigation }: any) => {
       addInfoToProgress(id, token);
     }
   }
-
+  
   return (
     <ImageBackground
       source={require("../../../../assets/images/bg.png")}
@@ -63,6 +66,7 @@ const InfoScreen = ({ navigation }: any) => {
           onPress={() => {
             // go back
             addInfoToProgress(id, token);
+            addNodeToProgress(node_id.id, token);
             navigation.navigate("MainScreen");
           }}
         >
