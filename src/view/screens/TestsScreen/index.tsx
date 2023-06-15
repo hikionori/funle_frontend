@@ -144,14 +144,14 @@ const TestsScreen = ({ route, navigation }: any) => {
 						</View>
 						<View>
 							{/* //* Question text **/}
-							<Text style={styles.question}>
+							<Text style={{ ...styles.question, fontSize: activeTest && activeTest.question.length > 20 ? 30 : 40 }}>
 								{activeTest && activeTest.question}
 							</Text>
 
 							<Text
 								style={{
 									fontWeight: "bold",
-									fontSize: 32,
+									fontSize: activeTest && activeTest.question.length > 20 ? 26 : 32,
 								}}
 							>
 								Оберіть правильну відповідь:
@@ -268,7 +268,7 @@ const TestsScreen = ({ route, navigation }: any) => {
 							// if res is TestState.Stop, navigate to MainScreen
 							if (res === TestState.Stop) {
 								navigation.navigate("AfterTests", {
-									id: node_id.id
+									id: node_id.id,
 								});
 							}
 						}}
