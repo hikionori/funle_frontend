@@ -100,6 +100,9 @@ const CourseChooseScreen = () => {
 						<TouchableOpacity
 							key={course._id.$oid}
 							onPress={() => onPressHandler(course._id.$oid)}
+							style={{
+								marginBottom: 20,
+							}}
 						>
 							<View
 								style={{
