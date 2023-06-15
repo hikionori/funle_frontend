@@ -1,1 +1,1 @@
-export const baseUrl = "https://dd6f-78-26-149-230.ngrok-free.app/"
+export const baseUrl = "http://api.funle.tech"
