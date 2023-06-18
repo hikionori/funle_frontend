@@ -269,7 +269,7 @@ const ProfileScreen = () => {
 											right: 40,
 										}}
 									>
-										{info[1]}
+										{info[1].length > 15 ? info[1].slice(0, 15) + "..." : info[1]}
 									</Text>
 								</View>
 							);
@@ -366,7 +366,7 @@ const ProfileScreen = () => {
 											right: 40,
 										}}
 									>
-										{test[1]}
+										{test[1].length > 15 ? test[1].slice(0, 15) + "..." : test[1]}
 									</Text>
 								</View>
 							);
